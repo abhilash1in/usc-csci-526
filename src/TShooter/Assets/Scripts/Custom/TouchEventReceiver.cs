@@ -10,9 +10,9 @@ public class TouchEventReceiver : MonoBehaviour, IPointerDownHandler
 
     void Awake()
     {
-        addPhysicsRaycaster();
-        playerGO = GameObject.Find("Player");
-        playerShoot = playerGO.GetComponent<PlayerShoot>();
+        //addPhysicsRaycaster();
+        //playerGO = GameObject.Find("Player");
+        //playerShoot = playerGO.GetComponent<PlayerShoot>();
     }
 
     void addPhysicsRaycaster()

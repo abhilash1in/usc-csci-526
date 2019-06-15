@@ -9,6 +9,8 @@ public class PlayerShoot : MonoBehaviour
     Shooter[] weapons;
     Shooter activeWeapon;
 
+    Player player;
+
     int currentWeaponIndex;
 
     bool canFire;
@@ -23,6 +25,11 @@ public class PlayerShoot : MonoBehaviour
         {
             return activeWeapon;
         }
+    }
+
+    private void Start()
+    {
+        player = GetComponent<Player>();
     }
 
     private void Awake()
@@ -79,20 +86,34 @@ public class PlayerShoot : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.InputController.MouseWheelDown)
-            SwitchWeapon(1);
+        if(!player.IsLocalPlayer)
+        {
+            if(player.InputState.Fire1)
+            {
+                ActiveWeapon.Fire();
+            }
+        }
 
-        if (GameManager.Instance.InputController.MouseWheelUp)
-            SwitchWeapon(-1);
 
+        if (player.IsLocalPlayer)
+        {
+            if (GameManager.Instance.InputController.MouseWheelDown)
+                SwitchWeapon(1);
 
-        if (GameManager.Instance.LocalPLayer.PlayerState.MoveState == PlayerState.EMoveState.SPRINTING)
-            return;
+            if (GameManager.Instance.InputController.MouseWheelUp)
+                SwitchWeapon(-1);
 
-        if (!canFire)
-            return;
+            if (GameManager.Instance.LocalPLayer.PlayerState.MoveState == PlayerState.EMoveState.SPRINTING)
+                return;
 
-        if (GameManager.Instance.InputController.Fire1)
-            activeWeapon.Fire();
+            if (!canFire)
+                return;
+
+            if (player.InputState.Fire1)
+            {
+                activeWeapon.SetAimPoint(activeWeapon.GetImapctPoint());
+                activeWeapon.Fire();
+            }
+        }
     }
 }

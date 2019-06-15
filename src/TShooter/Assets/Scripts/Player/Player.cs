@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
         public bool LockMouse;
     }
 
-    [SerializeField] float runSpeed;
+    [SerializeField] public float runSpeed;
     [SerializeField] float turnSpeed;
     [SerializeField] float walkSpeed;
     [SerializeField] float crouchSpeed;
@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] float minimumMoveThreshold;
 
     public PlayerAim playerAim;
+    public bool IsLocalPlayer;
    
     Vector3 previousPosition;
 
@@ -41,6 +42,20 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    private InputController.InputState m_InputState;
+    public InputController.InputState InputState
+    {
+        get
+        {
+            if (m_InputState == null)
+            {
+                m_InputState = GameManager.Instance.InputController.State;
+            }
+            return m_InputState;
+        }
+    }
+
     private PlayerShoot m_PlayerShoot;
     public PlayerShoot PlayerShoot
     {
@@ -53,6 +68,7 @@ public class Player : MonoBehaviour
             return m_PlayerShoot;
         }
     }
+
 
     //private Crosshair m_Crosshair;
     //private Crosshair Crosshair
@@ -81,14 +97,29 @@ public class Player : MonoBehaviour
     }
 
 
-    InputController playerInput;
+    public InputController.InputState playerInput;
+
     Vector2 mouseInput;
 
 
     // Start is called before the first frame update
     void Awake()
     {
-        playerInput = GameManager.Instance.InputController;
+        if(!GameManager.Instance.isNetworkGame)
+        {
+            SetAsLocalPlayer();
+        }
+    }
+
+    public void setInputState(InputController.InputState state)
+    {
+        m_InputState = state;
+    }
+
+    public void SetAsLocalPlayer()
+    {
+        IsLocalPlayer = true;
+        playerInput = GameManager.Instance.InputController.State;
         GameManager.Instance.LocalPLayer = this;
 
         if (MouseControl.LockMouse)
@@ -101,11 +132,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        LookAround();
+        if (IsLocalPlayer)
+        {
+            if (!GameManager.Instance.isNetworkGame)
+                Move();
+            LookAround();
+        }
     }
 
-    private void Move()
+    public void Move(float Horizontal, float Vertical)
     {
         float moveSpeed = runSpeed;
 
@@ -119,9 +154,20 @@ public class Player : MonoBehaviour
             moveSpeed = crouchSpeed;
 
 
-
-        Vector2 direction = new Vector2(playerInput.Vertical * moveSpeed, playerInput.Horizontal * moveSpeed);
+        Vector2 direction = new Vector2(Vertical * moveSpeed, Horizontal * moveSpeed);
         MoveController.Move(transform.forward * direction.x * 0.02f + transform.right * direction.y * 0.02f);
+    }
+
+    private void Move()
+    {
+        if (playerInput == null)
+        {
+            playerInput = GameManager.Instance.InputController.State;
+            if (playerInput == null)
+                return;
+        }
+
+        Move(playerInput.Horizontal, playerInput.Vertical);
 
         // Commenting out since sound is now handled 
         // in PlayerSoundBridge.cs using Animation events
@@ -133,10 +179,15 @@ public class Player : MonoBehaviour
         //previousPosition = transform.position;
     }
 
+    public void SetInputController(InputController.InputState State)
+    {
+        playerInput = State;
+    }
+
     private void LookAround()
     {
-        mouseInput.x = Mathf.Lerp(mouseInput.x, playerInput.MouseInput.x, 1f / MouseControl.Damping.x);
-        mouseInput.y = Mathf.Lerp(mouseInput.y, playerInput.MouseInput.y, 1f / MouseControl.Damping.y);
+        mouseInput.x = Mathf.Lerp(mouseInput.x, GameManager.Instance.InputController.MouseInput.x, 1f / MouseControl.Damping.x);
+        mouseInput.y = Mathf.Lerp(mouseInput.y, GameManager.Instance.InputController.MouseInput.y, 1f / MouseControl.Damping.y);
 
         transform.Rotate(Vector3.up * mouseInput.x * MouseControl.Sensitivity.x);
         // Crosshair.LookHeight(mouseInput.y * MouseControl.Sensitivity.y);
