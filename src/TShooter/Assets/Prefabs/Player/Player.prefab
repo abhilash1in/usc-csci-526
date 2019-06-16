@@ -239,7 +239,7 @@ MonoBehaviour:
   hand: {fileID: 8174489607401252886}
   audioReload: {fileID: 8174489608115137024}
   audioFire: {fileID: 8174489607647885635}
-  aimTarget: {fileID: 8174489606369927500}
+  aimPoint: {x: 0, y: 0, z: 0}
   Reloader: {fileID: 0}
   canFire: 0
 --- !u!114 &8174489606363226046
@@ -5671,7 +5671,7 @@ MonoBehaviour:
   hand: {fileID: 8174489607401252886}
   audioReload: {fileID: 8174489606465730778}
   audioFire: {fileID: 8174489606051573165}
-  aimTarget: {fileID: 0}
+  aimPoint: {x: 0, y: 0, z: 0}
   Reloader: {fileID: 0}
   canFire: 0
 --- !u!114 &8174489607231117392
@@ -6147,6 +6147,7 @@ GameObject:
   - component: {fileID: 6860104955040979869}
   - component: {fileID: 5593846095959983586}
   - component: {fileID: 7723480442906189018}
+  - component: {fileID: 8431355701519905918}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -6198,6 +6199,18 @@ MonoBehaviour:
   footsteps: {fileID: 8174489606420137758}
   minimumMoveThreshold: 0.035
   playerAim: {fileID: 8174489607078805984}
+  IsLocalPlayer: 0
+  playerInput:
+    Vertical: 0
+    Horizontal: 0
+    Fire1: 0
+    Fire2: 0
+    Reload: 0
+    IsWalking: 0
+    IsSprinting: 0
+    IsCrouching: 0
+    AimAngle: 0
+    IsAiming: 0
 --- !u!114 &8174489608012620227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6223,6 +6236,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 230781f97f9744e8086a18c6af13f08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Vertical: 0
+  Horizontal: 0
+  IsWalking: 0
+  IsSprinting: 0
+  IsCrouching: 0
+  AimAngle: 0
+  isAiming: 0
 --- !u!114 &8174489608012620224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6346,6 +6366,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8da41a943347e462fb2c25051c9c5dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8431355701519905918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8174489608012620287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69cd17b1137f14377a42d5469a7f8837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8174489608115137026

@@ -15,14 +15,33 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject, timeToLive);
     }
 
-    private void Update()
-    { 
+    private void FixedUpdate()
+    {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, 5f))
         {
-            CheckDestructable(hit.transform);
+            if (GameManager.Instance.isNetworkGame)
+            {
+                if (hit.collider.tag == "Player")
+                {
+                    NetworkPlayerDestructable des = hit.collider.GetComponent<NetworkPlayerDestructable>();
+                    des.Shoot(hit.collider.name, damage);
+                }
+                else if (hit.collider.tag == "Base")
+                {
+                    Debug.Log("lapalapalapalapalapalapalapalapa");
+                    NetworkBaseDestructable des = hit.collider.GetComponent<NetworkBaseDestructable>();
+                    des.ShootBase(hit.collider.name, damage);
+                }
+
+            }
+            else
+            {
+                CheckDestructable(hit.transform);
+            }
+
         }
     }
 

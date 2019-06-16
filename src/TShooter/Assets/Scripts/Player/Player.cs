@@ -1,11 +1,23 @@
 ﻿  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerState))]
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
+    [SerializeField]
+    private float maxHealth = 10;
+
+    [SyncVar]
+    private float currentHealth;
+
+    [SyncVar]
+    private bool _isFrozen = false;
+
+    public static int counter = 0;
+
     [System.Serializable]
     public class MouseInput
     {
@@ -28,6 +40,12 @@ public class Player : MonoBehaviour
     public bool IsLocalPlayer;
    
     Vector3 previousPosition;
+
+    public bool isFrozen
+    {
+        get { return _isFrozen; }
+        protected set { _isFrozen = value; }
+    }
 
     private CharacterController m_MoveController; 
     public CharacterController MoveController
@@ -193,5 +211,64 @@ public class Player : MonoBehaviour
         // Crosshair.LookHeight(mouseInput.y * MouseControl.Sensitivity.y);
         playerAim.SetRotation(mouseInput.y * MouseControl.Sensitivity.y);
     }
-   
+
+    // Networking Code
+
+    public void PlayerSetup()
+    {
+        CmdBroadcastNewPlayerSetup();
+    }
+
+    [Command]
+    private void CmdBroadcastNewPlayerSetup()
+    {
+        RpcSetUpPlayerOnAllClients();
+    }
+
+    [ClientRpc]
+    private void RpcSetUpPlayerOnAllClients()
+    {
+        setDefaults();
+    }
+
+    [ClientRpc]
+    public void RpcTakeDamage(float _amount)
+    {
+        if (isFrozen)
+            return;
+
+        currentHealth -= _amount;
+        Freeze();
+
+        Debug.Log("Current Health" + currentHealth);
+    }
+
+    private void Freeze()
+    {
+        isFrozen = true;
+
+        //DISABLE COMPONENTS
+
+        GetComponent<PlayerShoot>().enabled = false;
+
+        //CALL RESPAWN METHOD
+
+        StartCoroutine(Reset());
+
+        IEnumerator Reset()
+        {
+            yield return new WaitForSeconds(3f);
+
+            isFrozen = false;
+            GetComponent<PlayerShoot>().enabled = true;
+        }
+
+    }
+
+    private void setDefaults()
+    {
+        isFrozen = false;
+        currentHealth = maxHealth;
+    }
+
 }

@@ -125,6 +125,11 @@ public class PlayerNetwork : NetworkBehaviour
             player.SetInputController(lastReceivedState);
             player.setInputState(lastReceivedState);
 
+            if(lastReceivedState.Fire1)
+            {
+                Debug.Log("COOOOOOOOOOOOOOOOOOOOOOOOOOL");
+            }
+
             Vector3 shootingSolution = new Vector3(lastReceivedState.AimTargetX, lastReceivedState.AimTargetY, lastReceivedState.AimTargetZ);
             if (shootingSolution != Vector3.zero)
                 player.PlayerShoot.ActiveWeapon.SetAimPoint(shootingSolution);

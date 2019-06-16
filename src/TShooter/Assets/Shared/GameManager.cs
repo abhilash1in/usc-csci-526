@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameManager
 {
+    private static Dictionary<string, Player> players = new Dictionary<string, Player>();
+    private static Dictionary<string, Base> bases = new Dictionary<string, Base>();
+
     public event System.Action<Player> OnLocalPlayerJoined;
     private GameObject gameObject;
 
@@ -97,4 +100,37 @@ public class GameManager
             }
         }
     }
+
+    public static void RegisterPlayer(string netID, Player _player)
+    {
+        string playerID = "Player " + netID;
+        players.Add(playerID, _player);
+
+        _player.transform.name = playerID;
+    }
+
+    public static void RegisterBase(string id, Base _base)
+    {
+        string baseID = "Base " + id;
+        bases.Add(baseID, _base);
+
+        _base.transform.name = baseID;
+    }
+
+    public static Player GetPlayer(string _playerID)
+    {
+        return players[_playerID];
+    }
+
+    public static Base GetBase(string _baseID)
+    {
+        return bases[_baseID];
+    }
 }
+
+
+
+
+
+
+
