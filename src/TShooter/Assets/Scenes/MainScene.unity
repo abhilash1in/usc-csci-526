@@ -4211,7 +4211,7 @@ PrefabInstance:
     - target: {fileID: 2929252283123773951, guid: aaa2c939c0359ac4dbce3f49e8b90252,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773936, guid: aaa2c939c0359ac4dbce3f49e8b90252,
         type: 3}
@@ -5845,7 +5845,7 @@ PrefabInstance:
     - target: {fileID: 2929252283123773951, guid: aaa2c939c0359ac4dbce3f49e8b90252,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
@@ -7038,6 +7038,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8174489608012620229, guid: 6d37d99d3454443c3a41dddbcdc3b3c6,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 2070091925}
+    - target: {fileID: 8174489608012620229, guid: 6d37d99d3454443c3a41dddbcdc3b3c6,
+        type: 3}
+      propertyPath: spawnPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 243369632}
     - target: {fileID: 8174489608012620284, guid: 6d37d99d3454443c3a41dddbcdc3b3c6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7093,16 +7103,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8174489608012620229, guid: 6d37d99d3454443c3a41dddbcdc3b3c6,
-        type: 3}
-      propertyPath: spawnPoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 2070091925}
-    - target: {fileID: 8174489608012620229, guid: 6d37d99d3454443c3a41dddbcdc3b3c6,
-        type: 3}
-      propertyPath: spawnPoints.Array.data[1]
-      value: 
-      objectReference: {fileID: 243369632}
     - target: {fileID: 5593846095959983586, guid: 6d37d99d3454443c3a41dddbcdc3b3c6,
         type: 3}
       propertyPath: componentsToDisable.Array.size
