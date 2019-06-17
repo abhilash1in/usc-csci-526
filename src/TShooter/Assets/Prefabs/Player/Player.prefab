@@ -240,6 +240,8 @@ MonoBehaviour:
   audioReload: {fileID: 8174489608115137024}
   audioFire: {fileID: 8174489607647885635}
   aimPoint: {x: 0, y: 0, z: 0}
+  AimTarget: {fileID: 8174489606369927500}
+  AimTargetOffset: {x: 0, y: 0, z: 0}
   Reloader: {fileID: 0}
   canFire: 0
 --- !u!114 &8174489606363226046
@@ -5672,6 +5674,8 @@ MonoBehaviour:
   audioReload: {fileID: 8174489606465730778}
   audioFire: {fileID: 8174489606051573165}
   aimPoint: {x: 0, y: 0, z: 0}
+  AimTarget: {fileID: 0}
+  AimTargetOffset: {x: 0, y: 0, z: 0}
   Reloader: {fileID: 0}
   canFire: 0
 --- !u!114 &8174489607231117392
@@ -6563,14 +6567,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8174489607752860101}
     m_Modifications:
-    - target: {fileID: 100000, guid: b561e5bdb79e642abb1b64e59c72e1d8, type: 3}
-      propertyPath: m_Name
-      value: AssaultRifle
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: b561e5bdb79e642abb1b64e59c72e1d8, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b561e5bdb79e642abb1b64e59c72e1d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -6626,6 +6622,14 @@ PrefabInstance:
     - target: {fileID: 400000, guid: b561e5bdb79e642abb1b64e59c72e1d8, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b561e5bdb79e642abb1b64e59c72e1d8, type: 3}
+      propertyPath: m_Name
+      value: AssaultRifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b561e5bdb79e642abb1b64e59c72e1d8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b561e5bdb79e642abb1b64e59c72e1d8, type: 3}
@@ -6642,14 +6646,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8174489607422478031}
     m_Modifications:
-    - target: {fileID: 100000, guid: b561e5bdb79e642abb1b64e59c72e1d8, type: 3}
-      propertyPath: m_Name
-      value: AssaultRifle
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: b561e5bdb79e642abb1b64e59c72e1d8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b561e5bdb79e642abb1b64e59c72e1d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -6704,6 +6700,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b561e5bdb79e642abb1b64e59c72e1d8, type: 3}
       propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b561e5bdb79e642abb1b64e59c72e1d8, type: 3}
+      propertyPath: m_Name
+      value: AssaultRifle
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b561e5bdb79e642abb1b64e59c72e1d8, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -11,6 +11,10 @@ public class Shooter : MonoBehaviour
     [SerializeField] AudioController audioFire;
     [SerializeField] Vector3 aimPoint;
 
+    // TODO - temporary workaround
+    public Transform AimTarget;
+    public Vector3 AimTargetOffset;
+
     public WeaponReloader Reloader;
     private ParticleSystem muzzleFireParticleSystem;
 
@@ -35,18 +39,21 @@ public class Shooter : MonoBehaviour
 
     public Vector3 GetImapctPoint()
     {
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f,0.5f,0));
-        RaycastHit hit;
+        // TODO - temporary fix
+        //Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f,0.5f,0));
+        //RaycastHit hit;
 
-        Vector3 targetPosition = ray.GetPoint(500);
+        //Vector3 targetPosition = ray.GetPoint(500);
 
-        if (Physics.Raycast(ray, out hit))
-        {
-            return hit.point;
-        }
+        //if (Physics.Raycast(ray, out hit))
+        //{
+        //    return hit.point;
+        //}
 
 
-        return transform.position + transform.forward * 50;
+        //return transform.position + transform.forward * 50;
+
+        return AimTarget.position + AimTargetOffset;
 
     }
 
@@ -95,13 +102,13 @@ public class Shooter : MonoBehaviour
 
         nextFireAllowed = Time.time + rateOfFire;
 
-        muzzle.LookAt(aimPoint);
+        //muzzle.LookAt(aimPoint);
+        muzzle.LookAt(AimTarget.position + AimTargetOffset);
         FireEffect();
 
         // instantiate the projectile
         Instantiate(projectile, muzzle.position, muzzle.rotation);
         audioFire.Play();
         canFire = true;
-
     }
 }

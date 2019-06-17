@@ -107,7 +107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b4a74d0ff4c4094a5ed9f94f134bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 50
+  respawnDuration: 2
+  remainingHitsToRespawn: 0
+  respawnThreshold: 10
   teamID: 
 --- !u!114 &6043810170650620473
 MonoBehaviour:
