@@ -10,18 +10,15 @@ public class SpawnBases : NetworkBehaviour
     public int randomizeWaitThreshold = 5;
     [SerializeField] GameObject BaseSpawnPointContainer;
 
-    void Start()
+    public override void OnStartServer()
     {
-        CmdSpawnBases();
+        SpawnGameBases();
     }
 
-
-    [Command]
-    public void CmdSpawnBases()
+    public void SpawnGameBases()
     {
         int spawnIndex1, spawnIndex2;
         int randomizeIndex = 0;
-
 
         SpawnPoint[] baseSpawnPoints = BaseSpawnPointContainer.GetComponentsInChildren<SpawnPoint>();
 
@@ -36,8 +33,11 @@ public class SpawnBases : NetworkBehaviour
             randomizeIndex++;
         }
 
-        GameObject b1 = Instantiate(basePrefab, baseSpawnPoints[spawnIndex1].transform);
-        GameObject b2 = Instantiate(basePrefab, baseSpawnPoints[spawnIndex2].transform);
+        GameObject b1 = Instantiate(basePrefab, baseSpawnPoints[0].transform);
+        b1.GetComponent<Renderer>().material.color = Color.blue;
+
+        GameObject b2 = Instantiate(basePrefab, baseSpawnPoints[1].transform);
+        b2.GetComponent<Renderer>().material.color = Color.green;
 
         NetworkServer.Spawn(b1);
         NetworkServer.Spawn(b2);
