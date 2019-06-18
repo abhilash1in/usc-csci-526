@@ -5,15 +5,18 @@ using UnityEngine.EventSystems;
 
 public class TouchEventReceiver : MonoBehaviour, IPointerDownHandler
 {
-    public GameObject playerGO;
     public PlayerShoot playerShoot;
 
-    void Awake()
+    private void Start()
     {
-        //addPhysicsRaycaster();
-        //playerGO = GameObject.Find("Player");
-        //playerShoot = playerGO.GetComponent<PlayerShoot>();
+        addPhysicsRaycaster();
     }
+
+    private PlayerShoot getShooter() {
+        Player playerGO = GameManager.Instance.LocalPLayer;
+        return playerGO.GetComponent<PlayerShoot>();
+    }
+
 
     void addPhysicsRaycaster()
     {
@@ -36,6 +39,7 @@ public class TouchEventReceiver : MonoBehaviour, IPointerDownHandler
     private void Reload()
     {
         print("Reload clicked!!!");
+        playerShoot = getShooter();
         if (playerShoot != null && playerShoot.ActiveWeapon != null)
             playerShoot.ActiveWeapon.Reload();
     }

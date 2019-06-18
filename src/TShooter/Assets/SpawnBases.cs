@@ -4,28 +4,35 @@ using UnityEngine.Networking;
 public class SpawnBases : NetworkBehaviour
 {
 
-    public GameObject basePrefab;
+    public GameObject basePrefab1;
+    public GameObject basePrefab2;
     // public Transform spawnPoint01;
     // public Transform spawnPoint02;
     public int randomizeWaitThreshold = 5;
-    [SerializeField] GameObject BaseSpawnPointContainer;
+    GameObject BaseSpawnPointContainer;
 
-    public override void OnStartServer()
+    public override void OnStartLocalPlayer()
     {
-        SpawnGameBases();
+        base.OnStartLocalPlayer();
+        if(isServer && isLocalPlayer)
+        {
+            CmdSpawnBases();
+        }
     }
 
-    public void SpawnGameBases()
+    [Command]
+    public void CmdSpawnBases()
     {
         int spawnIndex1, spawnIndex2;
         int randomizeIndex = 0;
 
+        BaseSpawnPointContainer = GameObject.Find("BaseSpawnPointContainer");
         SpawnPoint[] baseSpawnPoints = BaseSpawnPointContainer.GetComponentsInChildren<SpawnPoint>();
 
         spawnIndex1 = Random.Range(0, baseSpawnPoints.Length);
         spawnIndex2 = Random.Range(0, baseSpawnPoints.Length);
 
-        while(spawnIndex1 == spawnIndex2)
+        while (spawnIndex1 == spawnIndex2)
         {
             if (randomizeIndex > randomizeWaitThreshold)
                 break;
@@ -33,13 +40,12 @@ public class SpawnBases : NetworkBehaviour
             randomizeIndex++;
         }
 
-        GameObject b1 = Instantiate(basePrefab, baseSpawnPoints[0].transform);
-        b1.GetComponent<Renderer>().material.color = Color.blue;
+        GameObject b1 = Instantiate(basePrefab1, baseSpawnPoints[spawnIndex1].transform);
 
-        GameObject b2 = Instantiate(basePrefab, baseSpawnPoints[1].transform);
-        b2.GetComponent<Renderer>().material.color = Color.green;
+        GameObject b2 = Instantiate(basePrefab2, baseSpawnPoints[spawnIndex2].transform);
 
         NetworkServer.Spawn(b1);
         NetworkServer.Spawn(b2);
+
     }
 }

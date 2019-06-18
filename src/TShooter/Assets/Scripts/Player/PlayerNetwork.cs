@@ -31,6 +31,7 @@ public class PlayerNetwork : NetworkBehaviour
         public float AimTargetY;
         public float AimTargetZ;
         public float RotationAngleY;
+        public int RoundsRemainingInClip;
         public float TimeStamp;
 
     }
@@ -60,16 +61,19 @@ public class PlayerNetwork : NetworkBehaviour
             IsWalking = GameManager.Instance.InputController.IsWalking,
             Reload = GameManager.Instance.InputController.Reload,
             RotationAngleY = transform.rotation.eulerAngles.y,
-            TimeStamp = Time.time
+           TimeStamp = Time.time
 
         };
 
-        if(state.Fire1)
+        state.RoundsRemainingInClip = player.PlayerShoot.ActiveWeapon.Reloader.RoundsRemainingInClip;
+
+        if (state.Fire1)
         {
             Vector3 shootingSolution = player.PlayerShoot.ActiveWeapon.GetImapctPoint();
             state.AimTargetX = shootingSolution.x;
             state.AimTargetY = shootingSolution.y;
             state.AimTargetZ = shootingSolution.z;
+
         }
 
         return state;
@@ -122,13 +126,13 @@ public class PlayerNetwork : NetworkBehaviour
             PlayerAnimation.IsCrouching = lastReceivedState.IsCrouching;
             PlayerAnimation.AimAngle = lastReceivedState.AimAngle;
 
+            if (lastReceivedState.RoundsRemainingInClip <= 0)
+            {
+                lastReceivedState.Fire1 = false;
+            }
+
             player.SetInputController(lastReceivedState);
             player.setInputState(lastReceivedState);
-
-            if(lastReceivedState.Fire1)
-            {
-                Debug.Log("COOOOOOOOOOOOOOOOOOOOOOOOOOL");
-            }
 
             Vector3 shootingSolution = new Vector3(lastReceivedState.AimTargetX, lastReceivedState.AimTargetY, lastReceivedState.AimTargetZ);
             if (shootingSolution != Vector3.zero)
@@ -190,6 +194,8 @@ public class PlayerNetwork : NetworkBehaviour
                 
             };
 
+            stateSolution.RoundsRemainingInClip = lastReceivedRpcState.RoundsRemainingInClip;
+
             if (isInputStateDirty(stateSolution, lastSendRpcState))
             { 
                 lastSendRpcState = stateSolution;
@@ -228,6 +234,7 @@ public class PlayerNetwork : NetworkBehaviour
             a.IsSprinting != b.IsSprinting ||
             a.IsWalking != b.IsWalking ||
             a.Reload != b.Reload ||
+            a.RoundsRemainingInClip != b.RoundsRemainingInClip ||
             a.RotationAngleY != b.RotationAngleY; 
 
     }

@@ -9,12 +9,14 @@ public class Player : NetworkBehaviour
 {
     [SerializeField]
     private float maxHealth = 10;
-
+    
     [SyncVar]
     private float currentHealth;
 
     [SyncVar]
     private bool _isFrozen = false;
+
+    public string teamID = "";
 
     public static int counter = 0;
 
@@ -123,6 +125,7 @@ public class Player : NetworkBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+
         if(!GameManager.Instance.isNetworkGame)
         {
             SetAsLocalPlayer();
@@ -246,7 +249,6 @@ public class Player : NetworkBehaviour
     private void Freeze()
     {
         isFrozen = true;
-
         //DISABLE COMPONENTS
 
         GetComponent<PlayerShoot>().enabled = false;
@@ -257,7 +259,7 @@ public class Player : NetworkBehaviour
 
         IEnumerator Reset()
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(10f);
 
             isFrozen = false;
             GetComponent<PlayerShoot>().enabled = true;

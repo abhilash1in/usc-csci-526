@@ -107,6 +107,8 @@ public class GameManager
         players.Add(playerID, _player);
 
         _player.transform.name = playerID;
+        _player.teamID = netID;
+
     }
 
     public static void RegisterBase(string id, Base _base)

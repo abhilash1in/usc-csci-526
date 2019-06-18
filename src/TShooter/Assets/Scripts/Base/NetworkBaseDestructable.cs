@@ -3,7 +3,6 @@ using UnityEngine.Networking;
 
 public class NetworkBaseDestructable : NetworkBehaviour
 {
-
     [Client]
     public void ShootBase(string name, float damage)
     {

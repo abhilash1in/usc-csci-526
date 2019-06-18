@@ -31,9 +31,14 @@ public class Projectile : MonoBehaviour
                 }
                 else if (hit.collider.tag == "Base")
                 {
-                    Debug.Log("lapalapalapalapalapalapalapalapa");
-                    NetworkBaseDestructable des = hit.collider.GetComponent<NetworkBaseDestructable>();
-                    des.ShootBase(hit.collider.name, damage);
+                    Player player = GameManager.Instance.LocalPLayer;
+                    Base enemyBase = GameManager.GetBase(hit.collider.name);
+
+                    if(player.teamID != enemyBase.teamID)
+                    {
+                        NetworkBaseDestructable des = player.GetComponent<NetworkBaseDestructable>();
+                        des.ShootBase(hit.collider.name, damage);
+                    }   
                 }
 
             }
