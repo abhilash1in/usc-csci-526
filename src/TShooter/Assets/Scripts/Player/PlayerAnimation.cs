@@ -19,6 +19,7 @@ public class PlayerAnimation : MonoBehaviour
     void Awake()
     {
         animator = GetComponentInChildren<Animator>();
+
     }
 
     // Update is called once per frame
@@ -34,5 +35,6 @@ public class PlayerAnimation : MonoBehaviour
             GameManager.Instance.LocalPLayer.PlayerState.WeaponState == PlayerState.EWeaponState.AIMING ||
             GameManager.Instance.LocalPLayer.PlayerState.WeaponState == PlayerState.EWeaponState.AIMEDFIRING
         );
+        animator.SetBool("IsInCover", GameManager.Instance.LocalPLayer.PlayerState.MoveState == PlayerState.EMoveState.COVER);
     }
 }

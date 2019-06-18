@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Shared.Extensions;
+using System;
 
 [RequireComponent(typeof(SphereCollider))]
 public class Scanner : MonoBehaviour
@@ -8,7 +10,7 @@ public class Scanner : MonoBehaviour
     [SerializeField] float scanSpeed;
     [Range(0, 360)]
     [SerializeField] float fieldOfView;
-    [SerializeField] LayerMask mask;
+    [SerializeField] public LayerMask mask;
     SphereCollider rangeTrigger;
 
     public float ScanRange
@@ -52,37 +54,26 @@ public class Scanner : MonoBehaviour
         List<T> targets = new List<T>();
 
         Collider[] results = Physics.OverlapSphere(transform.position, ScanRange);
+        // print("Colliding targets: " + results.Length);
         for (int i = 0; i < results.Length; i++)
         {
             var target = results[i].transform.GetComponent<T>();
 
             if (target == null)
-                continue; 
-
-            if (!IsInLineOfSight(Vector3.up, results[i].transform.position))
                 continue;
+
+            // print("Found potential target");
+            if (!transform.IsInLineOfSight(results[i].transform.position, fieldOfView, mask, Vector3.up))
+            {
+                // print("Potential target not in line of sight. Abandoning.");
+                continue;
+            }
+                
 
             targets.Add(target);
         }
 
         PrepareScanner();
         return targets;
-    }
-
-    bool IsInLineOfSight(Vector3 eyeHeight, Vector3 targetPosition)
-    {
-        Vector3 direction = targetPosition - transform.position;
-        if(Vector3.Angle(transform.forward, direction.normalized) < (fieldOfView / 2))
-        {
-            float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
-
-            // Something blocking our view
-            if(Physics.Raycast(transform.position + eyeHeight, direction.normalized, distanceToTarget, mask))
-            {
-                return false;
-            }
-            return true;
-        }
-        return false;
     }
 }

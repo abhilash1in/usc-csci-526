@@ -2,83 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShoot : MonoBehaviour
+[RequireComponent(typeof(Player))]
+public class PlayerShoot : WeaponController
 {
-    [SerializeField] float WeaponSwitchTime;
+    bool IsPlayerAlive;
 
-    Shooter[] weapons;
-    Shooter activeWeapon;
 
-    int currentWeaponIndex;
-
-    bool canFire;
-
-    Transform weaponHolster;
-
-    public event System.Action<Shooter> OnWeaponSwitch;
-
-    public Shooter ActiveWeapon
+    private void Start()
     {
-        get
-        {
-            return activeWeapon;
-        }
+        IsPlayerAlive = true;
+        GetComponent<Player>().PlayerHealth.OnDeath += PlayerHealth_OnDeath;
     }
 
-    private void Awake()
+    void PlayerHealth_OnDeath()
     {
-        canFire = true;
-        weaponHolster = transform.Find("Weapons");
-        weapons = weaponHolster.GetComponentsInChildren<Shooter>();
-        if (weapons.Length > 0)
-            Equip(0);
-
-    }
-
-    void DeactivateWeapons()
-    {
-        for (int i = 0; i < weapons.Length; i++)
-        {
-            weapons[i].gameObject.SetActive(false);
-            weapons[i].gameObject.transform.SetParent(weaponHolster);
-        }
-    }
-
-    void SwitchWeapon(int direction)
-    {
-        canFire = false;
-
-        currentWeaponIndex += direction;
-
-        if (currentWeaponIndex > weapons.Length - 1)
-            currentWeaponIndex = 0;
-
-        if (currentWeaponIndex < 0)
-            currentWeaponIndex = weapons.Length - 1;
-
-        GameManager.Instance.Timer.Add(() =>
-       {
-           Equip(currentWeaponIndex);
-
-       }, WeaponSwitchTime);
-
-    }
-
-    void Equip(int index)
-    {
-        DeactivateWeapons();
-        canFire = true;
-        activeWeapon = weapons[index];
-        activeWeapon.Equip();
-        activeWeapon.gameObject.SetActive(true);
-
-        if (OnWeaponSwitch != null)
-            OnWeaponSwitch(activeWeapon);
+        IsPlayerAlive = false;
     }
 
 
     void Update()
     {
+        if (!IsPlayerAlive)
+            return;
+
         if (GameManager.Instance.InputController.MouseWheelDown)
             SwitchWeapon(1);
 
@@ -89,10 +35,13 @@ public class PlayerShoot : MonoBehaviour
         if (GameManager.Instance.LocalPLayer.PlayerState.MoveState == PlayerState.EMoveState.SPRINTING)
             return;
 
-        if (!canFire)
+        if (!CanFire)
             return;
 
         if (GameManager.Instance.InputController.Fire1)
-            activeWeapon.Fire();
+            ActiveWeapon.Fire();
+
+        if (GameManager.Instance.InputController.Reload)
+            ActiveWeapon.Reload();
     }
 }

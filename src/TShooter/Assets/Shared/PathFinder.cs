@@ -46,7 +46,7 @@ public class PathFinder : MonoBehaviour
 
     private void Update()
     {
-        if (destinationReached)
+        if (destinationReached || !Agent.hasPath)
             return;
 
         if (Agent.remainingDistance < distanceRemainingThreshold)

@@ -42,14 +42,15 @@ public class AmmoCounter : MonoBehaviour
         {
             text.fontSize = smallerFontSize;
             text.text = "NO AMMO!";
+            HelperMethods.ShowMessage("NO AMMO!");
         }
 
         else if (amountInClip == 0)
         {
             text.fontSize = smallerFontSize;
             text.text = "RELOAD!";
+            HelperMethods.ShowMessage("RELOAD!");
         }
-
         else
         {
             text.fontSize = fontSize;

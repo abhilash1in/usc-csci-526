@@ -14,6 +14,7 @@ public class InputController : MonoBehaviour
     public bool IsWalking;
     public bool IsSprinting;
     public bool IsCrouching;
+    public bool CoverToggle;
     public bool MouseWheelUp;
     public bool MouseWheelDown;
     
@@ -44,6 +45,7 @@ public class InputController : MonoBehaviour
         IsWalking = Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.LeftCommand);
         IsSprinting = Input.GetKey(KeyCode.LeftShift);
         IsCrouching = Input.GetKey(KeyCode.C);
+        CoverToggle = Input.GetKeyDown(KeyCode.F);
         MouseWheelUp = Input.GetAxis("Mouse ScrollWheel") > 0;
         MouseWheelDown = Input.GetAxis("Mouse ScrollWheel") < 0;
         

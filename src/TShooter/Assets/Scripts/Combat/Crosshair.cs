@@ -4,33 +4,58 @@ using UnityEngine;
 
 public class Crosshair : MonoBehaviour
 {
-    [SerializeField] Texture2D image;
-    [SerializeField] int size;
+    [SerializeField] float speed;
+    [SerializeField] bool OnAimOnly;
 
-    //[SerializeField] float maxAngle;
-    //[SerializeField] float minAngle;
+    public Transform Reticule;
 
-    //float lookHeight;
+    Transform crossTop;
+    Transform crossBottom;
+    Transform crossLeft;
+    Transform crossRight;
 
-    //public void LookHeight(float value)
-    //{
-    //    lookHeight += value;
-    //    if(lookHeight > maxAngle || lookHeight < minAngle)
-    //    {
-    //        lookHeight -= value;
-    //    }
-    //}
+    float reticuleStartPoint;
 
-    private void OnGUI()
+    private void Start()
     {
-        if(GameManager.Instance.LocalPLayer.PlayerState.WeaponState == PlayerState.EWeaponState.AIMING ||
-            GameManager.Instance.LocalPLayer.PlayerState.WeaponState == PlayerState.EWeaponState.AIMEDFIRING)
-        {
-            Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-            screenPosition.y = Screen.height - screenPosition.y;
+        crossTop = Reticule.Find("Cross/Top").transform;
+        crossBottom = Reticule.Find("Cross/Bottom").transform;
+        crossLeft = Reticule.Find("Cross/Left").transform;
+        crossRight = Reticule.Find("Cross/Right").transform;
 
-            // GUI.DrawTexture(new Rect(screenPosition.x, screenPosition.y - lookHeight, size, size), image);
-            GUI.DrawTexture(new Rect(screenPosition.x - size / 2, screenPosition.y - size / 2, size, size), image);
+        reticuleStartPoint = crossTop.localPosition.y;
+    }
+
+    void SetVisibility(bool value)
+    {
+        Reticule.gameObject.SetActive(value); 
+    }
+
+    private void Update()
+    {
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        Reticule.transform.position = Vector3.Lerp(Reticule.transform.position, screenPosition, speed * Time.deltaTime);
+
+        if (OnAimOnly)
+        {
+            SetVisibility(false);
+            if (GameManager.Instance.InputController.Fire2)
+            {
+                // Disable reticule when not aiming
+                SetVisibility(true);
+            }
         }
+        else
+        {
+            SetVisibility(true);
+        }
+    }
+
+    public void ApplyScale(float scale)
+    {
+        crossTop.localPosition = new Vector3(0, reticuleStartPoint + scale, 0);
+        crossBottom.localPosition = new Vector3(0, -reticuleStartPoint - scale, 0);
+        crossLeft.localPosition = new Vector3(-reticuleStartPoint - scale, 0, 0);
+        crossRight.localPosition = new Vector3(reticuleStartPoint + scale, 0, 0);
     }
 }

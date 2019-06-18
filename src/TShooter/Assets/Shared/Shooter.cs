@@ -9,10 +9,25 @@ public class Shooter : MonoBehaviour
     [SerializeField] Transform hand;
     [SerializeField] AudioController audioReload;
     [SerializeField] AudioController audioFire;
-    [SerializeField] Transform aimTarget;
+    [SerializeField] bool shouldRecoil = true;
 
+    public Transform AimTarget;
+    public Vector3 AimTargetOffset;
     public WeaponReloader Reloader;
+
     private ParticleSystem muzzleFireParticleSystem;
+
+
+    private WeaponRecoil m_WeaponRecoil;
+    private WeaponRecoil WeaponRecoil
+    {
+        get
+        {
+            if (m_WeaponRecoil == null)
+                m_WeaponRecoil = GetComponent<WeaponRecoil>();
+            return m_WeaponRecoil;
+        }
+    }
 
 
 
@@ -69,13 +84,33 @@ public class Shooter : MonoBehaviour
         }
         nextFireAllowed = Time.time + rateOfFire;
 
-        muzzle.LookAt(aimTarget);
+        bool isLocalPlayerControlled = AimTarget == null;
+
+        if(!isLocalPlayerControlled)
+            muzzle.LookAt(AimTarget.position + AimTargetOffset);
+
+
+        Projectile newBullet = (Projectile) Instantiate(projectile, muzzle.position, muzzle.rotation);
+
+        if (isLocalPlayerControlled)
+        {
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+            RaycastHit hit;
+
+            Vector3 targetPosition = ray.GetPoint(500);
+            if(Physics.Raycast(ray, out hit))
+                targetPosition = hit.point;
+
+            newBullet.transform.LookAt(targetPosition + AimTargetOffset);
+        }
+
+
+        if (shouldRecoil && this.WeaponRecoil != null)
+            this.WeaponRecoil.Activate();
+
         FireEffect();
 
-        // instantiate the projectile
-        Instantiate(projectile, muzzle.position, muzzle.rotation);
         audioFire.Play();
         canFire = true;
-
     }
 }

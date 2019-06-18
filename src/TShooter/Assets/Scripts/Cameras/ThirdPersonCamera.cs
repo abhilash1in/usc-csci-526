@@ -30,7 +30,7 @@ public class ThirdPersonCamera : MonoBehaviour
     void HandleOnLocalPlayerJoined(Player player)
     {
         localPlayer = player;
-        cameraLookTarget = localPlayer.transform.Find("CameraLookTarget");
+        cameraLookTarget = localPlayer.transform.Find("AimingPivot");
 
         if(cameraLookTarget == null)
         {
@@ -55,16 +55,28 @@ public class ThirdPersonCamera : MonoBehaviour
         }
 
         float targetHeight = cameraRig.CameraOffset.y + 
-            (localPlayer.PlayerState.MoveState == PlayerState.EMoveState.CROUCHING ? cameraRig .CrouchHeight : 0);
+            (localPlayer.PlayerState.MoveState == PlayerState.EMoveState.CROUCHING ? cameraRig.CrouchHeight : 0);
 
         Vector3 targetPosition = cameraLookTarget.position + localPlayer.transform.forward * cameraRig.CameraOffset.z +
             localPlayer.transform.up * targetHeight +
             localPlayer.transform.right * cameraRig.CameraOffset.x;
 
-        Quaternion targetRotation = Quaternion.LookRotation(cameraLookTarget.position - targetPosition, Vector3.up);
+        Vector3 collisionDestination = cameraLookTarget.position + localPlayer.transform.up * targetHeight - localPlayer.transform.forward * 0.5f;
 
+        HandleCameraCollision(collisionDestination, ref targetPosition);
 
         transform.position = Vector3.Lerp(transform.position, targetPosition, cameraRig.Damping * Time.deltaTime);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, cameraRig.Damping * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, cameraLookTarget.rotation, cameraRig.Damping * Time.deltaTime);
+    }
+
+
+    private void HandleCameraCollision(Vector3 toTarget, ref Vector3 fromTarget)
+    {
+        RaycastHit hit;
+        if (Physics.Linecast(toTarget, fromTarget, out hit))
+        {
+            Vector3 hitPoint = new Vector3(hit.point.x + hit.normal.x * 0.2f, hit.point.y, hit.point.z + hit.normal.z * 0.2f);
+            fromTarget = new Vector3(hitPoint.x, fromTarget.y, hitPoint.z);
+        }
     }
 }

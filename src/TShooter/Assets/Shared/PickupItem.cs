@@ -6,8 +6,7 @@ public class PickupItem : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        print(other.name);
-
+        print("OnTriggerEnter : " + other.name);
         if (other.tag != "Player")
             return;
 
@@ -17,7 +16,6 @@ public class PickupItem : MonoBehaviour
     public virtual void OnPickup(Transform item)
     {
         // nothing for now
-        print(item.name);
     }
 
     void Pickup(Transform item)

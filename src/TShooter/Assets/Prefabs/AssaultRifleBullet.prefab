@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 137762938061730244}
   - component: {fileID: 137762938061730243}
   - component: {fileID: 137762938061730242}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 137762939910788513}
   - component: {fileID: 137762939910788512}
   - component: {fileID: 137762939910788527}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AssaultRifleBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,6 +141,8 @@ MonoBehaviour:
   speed: 200
   timeToLive: 3
   damage: 1
+  bulletHole: {fileID: 8972476400238690137, guid: 9b518a19d9d5a4e698b9bc848bde19f0,
+    type: 3}
 --- !u!54 &137762939910788527
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -169,7 +171,7 @@ GameObject:
   - component: {fileID: 3621599986655902722}
   - component: {fileID: 3238707213381733517}
   - component: {fileID: 4572907517666123752}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5748922792868783856}
   - component: {fileID: 5029594378922994680}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
