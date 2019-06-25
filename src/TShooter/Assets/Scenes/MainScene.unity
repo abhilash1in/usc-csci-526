@@ -328,8 +328,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7706661846054de2b318943c5a6f25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeamID: 0
   hitPoints: 3
-  teamID: 0
+  m_DamageTaken: 0
   spawnPoints:
   - {fileID: 2070091925}
   - {fileID: 0}
@@ -1385,8 +1386,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367523faf422c4adab60dd92a8a959a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeamID: 0
   hitPoints: 1
-  teamID: 0
+  m_DamageTaken: 0
   rotationSpeed: 12
   repairTime: 10
 --- !u!65 &657206137
@@ -2521,8 +2523,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367523faf422c4adab60dd92a8a959a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeamID: 0
   hitPoints: 1
-  teamID: 0
+  m_DamageTaken: 0
   rotationSpeed: 12
   repairTime: 10
 --- !u!65 &1012512286
@@ -2820,8 +2823,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367523faf422c4adab60dd92a8a959a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeamID: 0
   hitPoints: 1
-  teamID: 0
+  m_DamageTaken: 0
   rotationSpeed: 12
   repairTime: 10
 --- !u!65 &1092197747
@@ -3139,8 +3143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471553ed4cf4e41519b70354c1773bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeamID: 0
   hitPoints: 5
-  teamID: 1
+  m_DamageTaken: 0
   repawnTime: 2
 --- !u!1 &1207176649
 GameObject:
@@ -3493,8 +3498,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367523faf422c4adab60dd92a8a959a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeamID: 0
   hitPoints: 1
-  teamID: 0
+  m_DamageTaken: 0
   rotationSpeed: 12
   repairTime: 10
 --- !u!65 &1367238275
@@ -4327,8 +4333,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367523faf422c4adab60dd92a8a959a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeamID: 0
   hitPoints: 1
-  teamID: 0
+  m_DamageTaken: 0
   rotationSpeed: 12
   repairTime: 10
 --- !u!65 &1592610595
@@ -5358,10 +5365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b4b759e65fd64872842f0519085fac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseTeam1: {fileID: 6337550025564722708, guid: 08a8099b68daf4a7792d9c8953be98e9,
-    type: 3}
-  BaseTeam2: {fileID: 6337550025564722708, guid: 08a8099b68daf4a7792d9c8953be98e9,
-    type: 3}
+  baseSpawnPointContainer: {fileID: 0}
 --- !u!4 &1973535197
 Transform:
   m_ObjectHideFlags: 0
@@ -5872,8 +5876,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471553ed4cf4e41519b70354c1773bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeamID: 0
   hitPoints: 5
-  teamID: 2
+  m_DamageTaken: 0
   repawnTime: 2
 --- !u!1001 &498483977347050495
 PrefabInstance:

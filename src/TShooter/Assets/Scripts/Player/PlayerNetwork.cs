@@ -58,7 +58,7 @@ public class PlayerNetwork : CustomNetworkBehviour
         }
     }
 
-    void PlayerHealth_OnDamageReceived()
+    void PlayerHealth_OnDamageReceived(float amount)
     {
         IsPlayerFrozen(true);
         GameManager.Instance.Timer.Add(() =>

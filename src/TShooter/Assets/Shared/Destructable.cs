@@ -8,7 +8,7 @@ public class Destructable : CustomNetworkBehviour
 {
     [SerializeField] float hitPoints;
     public event System.Action OnDeath;
-    public event System.Action OnDamageReceived;
+    public event System.Action<float> OnDamageReceived;
 
 
     [SyncVar(hook = "printDamageTaken")]
@@ -81,7 +81,7 @@ public class Destructable : CustomNetworkBehviour
 
         if(OnDamageReceived != null)
         {
-            OnDamageReceived();
+            OnDamageReceived(amount);
         }
 
         if(HitPointsRemaining <= 0)
