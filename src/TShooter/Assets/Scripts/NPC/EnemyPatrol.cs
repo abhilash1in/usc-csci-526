@@ -40,14 +40,15 @@ public class EnemyPatrol : MonoBehaviour
 
     void EnemyPlayer_OnTargetSelected(Player obj)
     {
-        print("EnemyPlayer_OnTargetSelected");
-        pathFinder.Agent.isStopped = true;
+        if(pathFinder.Agent.isActiveAndEnabled)
+            pathFinder.Agent.isStopped = true;
     }
 
 
     void EnemyHealth_OnDeath()
     {
-        pathFinder.Agent.isStopped = true;
+        if (pathFinder.Agent.isActiveAndEnabled)
+            pathFinder.Agent.isStopped = true;
     }
 
     // TODO - Custom

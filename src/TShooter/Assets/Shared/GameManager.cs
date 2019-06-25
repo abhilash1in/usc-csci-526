@@ -7,6 +7,11 @@ public class GameManager
     public event System.Action<Player> OnLocalPlayerJoined;
     private GameObject gameObject;
 
+    public bool IsPaused { get; set; }
+
+    private bool m_IsNetworkGame;
+    private bool m_IsNetworkGameChecked;
+
     private static GameManager m_Instance; 
     public static GameManager Instance
     {
@@ -21,6 +26,21 @@ public class GameManager
                 m_Instance.gameObject.AddComponent<Respawner>();
             }
             return m_Instance;
+        }
+    }
+
+    public bool IsNetworkGame
+    {
+        get
+        {
+            if (!m_IsNetworkGameChecked)
+            {
+                m_IsNetworkGameChecked = true;
+                m_IsNetworkGame = GameObject.Find("NetworkManager") != null;
+                //m_IsNetworkGame = GameObject.Find("LobbyManager") != null;
+                Debug.Log("m_IsNetworkGame: " + m_IsNetworkGame);
+            }
+            return m_IsNetworkGame;
         }
     }
 
@@ -95,4 +115,5 @@ public class GameManager
             }
         }
     }
+
 }

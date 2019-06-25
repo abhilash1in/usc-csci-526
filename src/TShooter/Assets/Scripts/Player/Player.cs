@@ -15,28 +15,69 @@ public class Player : MonoBehaviour
         public Vector2 Damping;
         public Vector2 Sensitivity;
         public bool LockMouse;
-    }
+    } 
 
-    [SerializeField] SwatSoldier settings;
+    public SwatSoldier Settings;
 
     [SerializeField] MouseInput MouseControl;
-    [SerializeField] AudioController footsteps;
-    [SerializeField] float minimumMoveThreshold;
+
 
     public PlayerAim playerAim;
+    public bool IsLocalPlayer;
 
-    Vector3 previousPosition;
-
-    private CharacterController m_MoveController; 
-    public CharacterController MoveController
+    private InputController.InputState m_InputState;
+    public InputController.InputState InputState
     {
         get
         {
-            if(m_MoveController == null)
-            {
-                m_MoveController = GetComponent<CharacterController>();
-            }
-            return m_MoveController;
+            if (m_InputState == null)
+                m_InputState = GameManager.Instance.InputController.State;
+            return m_InputState;
+        }
+    }
+
+
+    private PlayerShoot m_PlayerShoot;
+    public PlayerShoot PlayerShoot
+    {
+        get
+        {
+            if (m_PlayerShoot == null)
+                m_PlayerShoot = GetComponent<PlayerShoot>();
+            return m_PlayerShoot;
+        }
+    }
+
+    private WeaponController m_WeaponController;
+    public WeaponController WeaponController
+    {
+        get
+        {
+            if (m_WeaponController == null)
+                m_WeaponController = GetComponent<WeaponController>();
+            return m_WeaponController;
+        }
+    }
+
+    private PlayerState m_PlayerState;
+    public PlayerState PlayerState
+    {
+        get
+        {
+            if (m_PlayerState == null)
+                m_PlayerState = GetComponentInChildren<PlayerState>();
+            return m_PlayerState;
+        }
+    }
+
+    private PlayerNetwork m_PlayerNetwork;
+    public PlayerNetwork PlayerNetwork
+    {
+        get
+        {
+            if (m_PlayerNetwork == null)
+                m_PlayerNetwork = GetComponent<PlayerNetwork>();
+            return m_PlayerNetwork;
         }
     }
 
@@ -46,49 +87,8 @@ public class Player : MonoBehaviour
         get
         {
             if (m_PlayerHealth == null)
-            {
-                m_PlayerHealth = GetComponent<PlayerHealth>();
-            }
+                m_PlayerHealth = GetComponentInChildren<PlayerHealth>();
             return m_PlayerHealth;
-        }
-    }
-
-    private PlayerShoot m_PlayerShoot;
-    public PlayerShoot PlayerShoot
-    {
-        get
-        {
-            if (m_PlayerShoot == null)
-            {
-                m_PlayerShoot = GetComponent<PlayerShoot>();
-            }
-            return m_PlayerShoot;
-        }
-    }
-
-    //private Crosshair m_Crosshair;
-    //private Crosshair Crosshair
-    //{
-    //    get
-    //    {
-    //        if(m_Crosshair == null)
-    //        {
-    //            m_Crosshair = GetComponentInChildren<Crosshair>();
-    //        }
-    //        return m_Crosshair;
-    //    }
-    //}
-
-    private PlayerState m_PlayerState;
-    public PlayerState PlayerState
-    {
-        get
-        {
-            if (m_PlayerState == null)
-            {
-                m_PlayerState = GetComponentInChildren<PlayerState>();
-            }
-            return m_PlayerState;
         }
     }
 
@@ -100,6 +100,21 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        if (!GameManager.Instance.IsNetworkGame)
+        {
+            print("Not a network game");
+            SetAsLocalPlayer();
+        }
+    }
+
+    public void SetInputState(InputController.InputState state)
+    {
+        m_InputState = state;
+    }
+
+    public void SetAsLocalPlayer()
+    {
+        IsLocalPlayer = true;
         playerInput = GameManager.Instance.InputController;
         GameManager.Instance.LocalPLayer = this;
 
@@ -113,49 +128,19 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!PlayerHealth.IsAlive)
+        if (!PlayerHealth.IsAlive || GameManager.Instance.IsPaused)
             return;
-        Move();
-        LookAround();
-    }
 
-    private void Move()
-    {
-        float moveSpeed = settings.RunSpeed;
+        if (IsLocalPlayer)
+            LookAround();
 
-        if (playerInput.IsWalking)
-            moveSpeed = settings.WalkSpeed;
-
-        if (playerInput.IsSprinting)
-            moveSpeed = settings.SprintSpeed;
-
-        if (playerInput.IsCrouching)
-            moveSpeed = settings.CrouchSpeed;
-
-        if (PlayerState.MoveState == PlayerState.EMoveState.COVER)
-            moveSpeed = settings.WalkSpeed;  
-
-
-        Vector2 direction = new Vector2(playerInput.Vertical * moveSpeed, playerInput.Horizontal * moveSpeed);
-        MoveController.SimpleMove(transform.forward * direction.x + transform.right * direction.y);
-
-        // Commenting out since sound is now handled 
-        // in PlayerSoundBridge.cs using Animation events
-
-        //if(Vector3.Distance(transform.position, previousPosition) > minimumMoveThreshold)
-        //{
-        //    footsteps.Play(); 
-        //}
-        //previousPosition = transform.position;
     }
 
     private void LookAround()
     {
         mouseInput.x = Mathf.Lerp(mouseInput.x, playerInput.MouseInput.x, 1f / MouseControl.Damping.x);
         mouseInput.y = Mathf.Lerp(mouseInput.y, playerInput.MouseInput.y, 1f / MouseControl.Damping.y);
-
         transform.Rotate(Vector3.up * mouseInput.x * MouseControl.Sensitivity.x);
-        // Crosshair.LookHeight(mouseInput.y * MouseControl.Sensitivity.y);
         playerAim.SetRotation(mouseInput.y * MouseControl.Sensitivity.y);
     }
    

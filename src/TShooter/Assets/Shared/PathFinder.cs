@@ -35,7 +35,6 @@ public class PathFinder : MonoBehaviour
     private void Start()
     {
         Agent = GetComponent<NavMeshAgent>();
-        print("PathFinder");
     }
 
     public void SetTarget(Vector3 target)

@@ -11,7 +11,9 @@ public class Shooter : MonoBehaviour
     [SerializeField] AudioController audioFire;
     [SerializeField] bool shouldRecoil = true;
 
-    public Transform AimTarget;
+    Player player;
+
+    public Vector3 AimPoint;
     public Vector3 AimTargetOffset;
     public WeaponReloader Reloader;
 
@@ -36,6 +38,11 @@ public class Shooter : MonoBehaviour
 
     public bool canFire;
 
+    public void SetAimPoint(Vector3 target)
+    {
+        AimPoint = target;
+    }
+
     public void Equip() 
     {
         transform.SetParent(hand);
@@ -46,6 +53,7 @@ public class Shooter : MonoBehaviour
     private void Awake()
     {
         muzzle = transform.Find("Model/Muzzle");
+        player = GetComponentInParent<Player>();
         Reloader = GetComponent<WeaponReloader>();
         muzzleFireParticleSystem = muzzle.GetComponent<ParticleSystem>();
     }
@@ -55,7 +63,9 @@ public class Shooter : MonoBehaviour
         if (Reloader == null)
             return;
 
-        Reloader.Reload();
+        if (player.IsLocalPlayer)
+            Reloader.Reload();
+
         audioReload.Play();
     }
 
@@ -73,7 +83,7 @@ public class Shooter : MonoBehaviour
         if (Time.time < nextFireAllowed)
             return;
 
-        if (Reloader != null)
+        if(player.IsLocalPlayer && Reloader != null) 
         {
             if (Reloader.IsReloading)
                 return;
@@ -84,26 +94,15 @@ public class Shooter : MonoBehaviour
         }
         nextFireAllowed = Time.time + rateOfFire;
 
-        bool isLocalPlayerControlled = AimTarget == null;
-
-        if(!isLocalPlayerControlled)
-            muzzle.LookAt(AimTarget.position + AimTargetOffset);
-
+        muzzle.LookAt(AimPoint + AimTargetOffset);
 
         Projectile newBullet = (Projectile) Instantiate(projectile, muzzle.position, muzzle.rotation);
+        // newBullet.transform.LookAt(targetPosition + AimTargetOffset);
 
-        if (isLocalPlayerControlled)
+        if(player.PlayerNetwork != null)
         {
-            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-            RaycastHit hit;
-
-            Vector3 targetPosition = ray.GetPoint(500);
-            if(Physics.Raycast(ray, out hit))
-                targetPosition = hit.point;
-
-            newBullet.transform.LookAt(targetPosition + AimTargetOffset);
+            newBullet.originTeamID = player.PlayerNetwork.TeamID;
         }
-
 
         if (shouldRecoil && this.WeaponRecoil != null)
             this.WeaponRecoil.Activate();

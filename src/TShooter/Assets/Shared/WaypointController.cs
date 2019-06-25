@@ -10,11 +10,6 @@ public class WaypointController : MonoBehaviour
 
     public event System.Action<Waypoint> OnWaypointChanged;
 
-    private void Start()
-    {
-        print("WaypointController");
-    }
-
     private void Awake()
     {
         waypoints = GetWaypoints();

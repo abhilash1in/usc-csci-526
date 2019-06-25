@@ -143,6 +143,7 @@ MonoBehaviour:
   damage: 1
   bulletHole: {fileID: 8972476400238690137, guid: 9b518a19d9d5a4e698b9bc848bde19f0,
     type: 3}
+  originTeamID: 0
 --- !u!54 &137762939910788527
 Rigidbody:
   m_ObjectHideFlags: 0

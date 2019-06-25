@@ -1,21 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 //[RequireComponent(typeof(Collider))]
-public class Destructable : MonoBehaviour
+public class Destructable : CustomNetworkBehviour
 {
     [SerializeField] float hitPoints;
     public event System.Action OnDeath;
     public event System.Action OnDamageReceived;
 
-    private float damagaeTaken;
+
+    [SyncVar(hook = "printDamageTaken")]
+    [SerializeField]
+    private float m_DamageTaken;
+
+
+    public float DamageTaken
+    {
+        get
+        {
+            return m_DamageTaken;
+        }
+
+        set
+        {
+            m_DamageTaken = value;
+            if (HitPointsRemaining <= 0)
+            {
+                Die();
+            }
+        }
+    }
+
+    private void printDamageTaken(float d)
+    {
+        print("Hook invoked: " + d);
+    }
+
 
     public float HitPointsRemaining
     {
         get
         {
-            return hitPoints - damagaeTaken;
+            return hitPoints - m_DamageTaken;
+        }
+        set
+        {
+            HitPointsRemaining = value;
         }
     }
 
@@ -42,7 +74,10 @@ public class Destructable : MonoBehaviour
 
     public virtual void TakeDamage(float amount)
     {
-        damagaeTaken += amount;
+        if (!IsAlive)
+            return;
+
+        m_DamageTaken += amount;
 
         if(OnDamageReceived != null)
         {
@@ -55,8 +90,13 @@ public class Destructable : MonoBehaviour
         }
     }
 
+    public void AssignTeam(CustomNetworkBehviour.ETeamID id)
+    {
+        this.TeamID = id;
+    }
+
     public void Reset()
     {
-        damagaeTaken = 0;
+        m_DamageTaken = 0;
     }
 }

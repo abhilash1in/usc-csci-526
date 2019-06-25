@@ -127,7 +127,7 @@ public class EnemyPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (priorityTarget == null)
+        if (priorityTarget == null || !EnemyHealth.IsAlive)
             return;
 
         transform.LookAt(priorityTarget.transform.position);

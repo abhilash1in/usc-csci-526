@@ -19,7 +19,7 @@ public class WeaponController : MonoBehaviour
     Shooter m_ActiveWeapon;
     public Shooter ActiveWeapon
     {
-        get
+        get  
         {
             return m_ActiveWeapon;
         }
@@ -33,6 +33,20 @@ public class WeaponController : MonoBehaviour
         if (weapons.Length > 0)
             Equip(0);
 
+    }
+
+
+    public Vector3 GetImpactPoint()
+    {
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+
+        Vector3 targetPosition = ray.GetPoint(500);
+        if (Physics.Raycast(ray, out hit, 500))
+            return hit.point;
+
+        return targetPosition;
+        //return transform.position + transform.forward * 50;
     }
 
     internal void DeactivateWeapons()

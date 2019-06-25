@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] float damage;
     [SerializeField] Transform bulletHole;
     Vector3 destination;
+    public CustomNetworkBehviour.ETeamID originTeamID;
 
 
     private void Start()
@@ -51,9 +52,22 @@ public class Projectile : MonoBehaviour
 
         if(destructable == null)
         {
-            return;
+            destructable = hitInfo.transform.GetComponentInParent<Destructable>();
+            if (destructable == null)
+            {
+                return;
+            }
         }
-        destructable.TakeDamage(damage);
+        if(destructable.TeamID != originTeamID)
+        {
+            HelperMethods.ShowMessage("Nice Shot!");
+            destructable.TakeDamage(damage);
+        }
+            
+        else
+        {
+            HelperMethods.ShowMessage("Frendly Fire");
+        }
     }
 
     bool isDetinationReached()

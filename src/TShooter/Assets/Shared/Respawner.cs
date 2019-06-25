@@ -6,6 +6,7 @@ public class Respawner : MonoBehaviour
 {
     [SerializeField] Vector2 xLimits = new Vector2(-50, 50);
     [SerializeField] Vector2 zLimits = new Vector2(-50, 50);
+
     public void Despawn(GameObject go, float inSeconds)
     {
         go.SetActive(false);

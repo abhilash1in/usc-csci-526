@@ -50,7 +50,6 @@ public class Scanner : MonoBehaviour
 
     public List<T> ScanForTargets<T>()
     {
-        print("ScanForTargets");
         List<T> targets = new List<T>();
 
         Collider[] results = Physics.OverlapSphere(transform.position, ScanRange);

@@ -11,6 +11,7 @@ public class EnemyShoot : WeaponController
     [SerializeField] float burstDurationMax; 
     EnemyPlayer enemyPlayer;
     bool shouldFire;
+    Vector3 myTarget;
 
     private void Start()
     {
@@ -20,8 +21,8 @@ public class EnemyShoot : WeaponController
 
     void EnemyPlayer_OnTargetSelected(Player target)
     {
-        print("EnemyPlayer_OnTargetSelected");
-        ActiveWeapon.AimTarget = target.transform;
+        myTarget = target.transform.position;
+        ActiveWeapon.SetAimPoint(target.transform.position);
         ActiveWeapon.AimTargetOffset = Vector3.up * 1.5f;
         StartBurst();
     }
@@ -32,7 +33,7 @@ public class EnemyShoot : WeaponController
         bool takeCover = Random.Range(0, 3) == 0;
         if (!takeCover)
             return;
-        float distanceToTarget = Vector3.Distance(transform.position, ActiveWeapon.AimTarget.position);
+        float distanceToTarget = Vector3.Distance(transform.position, myTarget);
         if(distanceToTarget > 15)
         {
             enemyPlayer.GetComponent<EnemyAnimation>().IsCrouching = true;
@@ -65,7 +66,7 @@ public class EnemyShoot : WeaponController
 
     bool canSeeTarget()
     {
-        if (!transform.IsInLineOfSight(ActiveWeapon.AimTarget.position, 90, enemyPlayer.playerScanner.mask, Vector3.up))
+        if (!transform.IsInLineOfSight(myTarget, 90, enemyPlayer.playerScanner.mask, Vector3.up))
         {
             enemyPlayer.ClearTargetAndScan();
             return false;

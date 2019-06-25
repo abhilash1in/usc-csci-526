@@ -96,10 +96,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultCamera:
-    CameraOffset: {x: 0.4, y: 0.8, z: -5}
+    CameraOffset: {x: 0.4, y: 0.4, z: -5}
     CrouchHeight: -0.5
     Damping: 5
   aimCamera:
-    CameraOffset: {x: 0.8, y: 0.6, z: -2}
+    CameraOffset: {x: 0.6, y: 0.6, z: -1.5}
     CrouchHeight: -0.5
     Damping: 15
+  cameraLookTarget: {fileID: 0}

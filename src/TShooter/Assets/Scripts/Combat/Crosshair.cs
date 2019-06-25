@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Crosshair : MonoBehaviour
 {
@@ -18,6 +19,16 @@ public class Crosshair : MonoBehaviour
 
     private void Start()
     {
+        if (!GetComponentInParent<Player>().IsLocalPlayer)
+        {
+            Destroy(this.gameObject);
+        }
+
+        GameObject UICanvasGO = GameObject.Find("UICanvas");
+        Transform reticuleTransform = UICanvasGO.transform.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "Reticule");
+
+
+        Reticule = reticuleTransform;
         crossTop = Reticule.Find("Cross/Top").transform;
         crossBottom = Reticule.Find("Cross/Bottom").transform;
         crossLeft = Reticule.Find("Cross/Left").transform;
@@ -53,6 +64,8 @@ public class Crosshair : MonoBehaviour
 
     public void ApplyScale(float scale)
     {
+        if (crossTop == null)
+            return;
         crossTop.localPosition = new Vector3(0, reticuleStartPoint + scale, 0);
         crossBottom.localPosition = new Vector3(0, -reticuleStartPoint - scale, 0);
         crossLeft.localPosition = new Vector3(-reticuleStartPoint - scale, 0, 0);

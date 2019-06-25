@@ -11,8 +11,12 @@ public class TouchEventReceiver : MonoBehaviour, IPointerDownHandler
     void Awake()
     {
         addPhysicsRaycaster();
-        playerGO = GameObject.Find("Player");
-        playerShoot = playerGO.GetComponent<PlayerShoot>();
+        GameManager.Instance.OnLocalPlayerJoined += HandleOnLocalPlayerJoined;
+    }
+
+    void HandleOnLocalPlayerJoined(Player player)
+    {
+        playerShoot = player.PlayerShoot;
     }
 
     void addPhysicsRaycaster()
@@ -35,8 +39,11 @@ public class TouchEventReceiver : MonoBehaviour, IPointerDownHandler
 
     private void Reload()
     {
+        if (playerShoot == null)
+            return;
+
         print("Reload clicked!!!");
-        if (playerShoot != null && playerShoot.ActiveWeapon != null)
+        if (playerShoot.ActiveWeapon != null)
             playerShoot.ActiveWeapon.Reload();
     }
 }

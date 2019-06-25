@@ -19,7 +19,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
 
 
-    Transform cameraLookTarget;
+    public Transform cameraLookTarget;
     Player localPlayer;
 
     void Awake()

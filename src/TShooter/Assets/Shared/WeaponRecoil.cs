@@ -82,6 +82,11 @@ public class WeaponRecoil : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        this.Crosshair.ApplyScale(0);
+    }
+
     float getPercentage()
     {
         float percentage = recoilActiveTime / recoilSpeed;
