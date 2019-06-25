@@ -5365,7 +5365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b4b759e65fd64872842f0519085fac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpawnPointContainer: {fileID: 0}
+  baseSpawnPointContainer: {fileID: 1085063033}
 --- !u!4 &1973535197
 Transform:
   m_ObjectHideFlags: 0

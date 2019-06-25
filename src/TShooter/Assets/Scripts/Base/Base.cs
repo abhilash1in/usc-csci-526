@@ -43,7 +43,10 @@ public class Base : CustomNetworkBehviour
         {
             Transform spawnPointTransform = spawnPointContainer.transform.Find(spName);
             if (spawnPointTransform != null)
+            {
                 transform.SetParent(spawnPointTransform);
+                transform.position = spawnPointTransform.position;
+            }
         }
     }
 

@@ -18,7 +18,8 @@ public class BaseHealth : Destructable
 
     private void Awake()
     {
-        remainingHealthBeforeRespawn = Random.Range(0, HitPointsRemaining);
+        //remainingHealthBeforeRespawn = Random.Range(0, HitPointsRemaining);
+        remainingHealthBeforeRespawn = 2;
         mBase = GetComponent<Base>();
         spawner = GameObject.Find("BaseSpawner")?.GetComponent<BaseSpawner>();
         this.OnDamageReceived += Handle_OnDamageReceived;
@@ -30,7 +31,8 @@ public class BaseHealth : Destructable
         remainingHealthBeforeRespawn -= amount;
         if(remainingHealthBeforeRespawn <= 0)
         {
-            remainingHealthBeforeRespawn = Random.Range(0, HitPointsRemaining);
+            //remainingHealthBeforeRespawn = Random.Range(0, HitPointsRemaining);
+            remainingHealthBeforeRespawn = 2;
             // respawn if base has not died
             mBase.SetSpawnPoint(spawner.GetNewSpawnPointTransform().name);
         }

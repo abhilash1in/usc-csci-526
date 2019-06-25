@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TeamID: 0
+  spawnPointName: 
   redMaterial: {fileID: 2100000, guid: f4849be961b6242a3bbe41c2fb57718f, type: 2}
   blueMaterial: {fileID: 2100000, guid: a549f3394291e4657b62f04890f480a8, type: 2}
 --- !u!114 &8333983989917102040
@@ -156,5 +157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TeamID: 0
-  hitPoints: 5
+  hitPoints: 10
+  m_DamageTaken: 0
   remainingHealthBeforeRespawn: 0
