@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using System.Linq;
 
 public class Base : CustomNetworkBehviour
 {
@@ -12,21 +13,32 @@ public class Base : CustomNetworkBehviour
 
     [SerializeField]
     Material blueMaterial;
-
+    
     Renderer renderer;
 
-    GameObject spawnPointContainer;
+    private BaseSpawner m_Spawner;
+    public BaseSpawner BaseSpawner
+    {
+        get
+        {
+            if (m_Spawner == null)
+                m_Spawner = GetComponent<BaseSpawner>();
+            return m_Spawner;
+        }
+    }
 
     private void Start()
     {
         UpdateMaterial();
-        UpdateSpawnPoint(spawnPointName);
+        if (isServer)
+        {
+            SetSpawnPoint(BaseSpawner.GetNewSpawnPointTransform().name);
+        }
     }
 
     private void Awake()
     {
         renderer = GetComponent<Renderer>();
-        spawnPointContainer = GameObject.Find("BaseSpawnPointContainer");
         //UpdateMaterial();
         print("Base start");
     }
@@ -39,14 +51,12 @@ public class Base : CustomNetworkBehviour
 
     public void UpdateSpawnPoint(string spName)
     {
-        if(spawnPointContainer != null)
+        Transform spawnPointTransform = BaseSpawner.GetSpawnPointWithName(spName);
+        if(spawnPointTransform != null)
         {
-            Transform spawnPointTransform = spawnPointContainer.transform.Find(spName);
-            if (spawnPointTransform != null)
-            {
-                transform.SetParent(spawnPointTransform);
-                transform.position = spawnPointTransform.position;
-            }
+            transform.SetParent(spawnPointTransform);
+            transform.position = spawnPointTransform.position;
+            transform.rotation = spawnPointTransform.rotation;
         }
     }
 

@@ -21,9 +21,15 @@ namespace Prototype.NetworkLobby
         public float prematchCountdown = 5.0f;
 
         [Space]
+        [Header("Base Info")]
+        [Tooltip("Information about the bases to be spawned.")]
+        [SerializeField] GameObject basePrefab;
+        [SerializeField] Material blueMaterial;
+        [SerializeField] Material redMaterial;
+
+        [Space]
         [Header("UI Reference")]
         public LobbyTopPanel topPanel;
-
         public RectTransform mainMenuPanel;
         public RectTransform lobbyPanel;
 
@@ -166,6 +172,11 @@ namespace Prototype.NetworkLobby
         }
 
         // ----------------- Server management
+
+        public override void OnServerSceneChanged(string sceneName)
+        {
+            base.OnServerSceneChanged(sceneName);
+        }
 
         public void AddLocalPlayer()
         {
@@ -407,7 +418,7 @@ namespace Prototype.NetworkLobby
                 SetServerInfo("Client", networkAddress);
             }
         }
-
+        
 
         public override void OnClientDisconnect(NetworkConnection conn)
         {

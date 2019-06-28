@@ -22,8 +22,8 @@ public class EscapeMenu : MonoBehaviour
 
     void OnYesClicked()
     {
+        GameManager.Instance.Timer.Clear();
         SceneManager.LoadScene(MainMenuSceneName);
-        //GameManager.Instance.Destroy();
     }
 
     void OnNoClicked()

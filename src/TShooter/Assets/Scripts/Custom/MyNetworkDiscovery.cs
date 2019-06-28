@@ -21,12 +21,14 @@ public class MyNetworkDiscovery : NetworkDiscovery
     void StartServerBroadcast()
     {
         initialized = Initialize();
-        if (initialized)
+        if (!initialized)
         {
-            StartAsServer();
-            Debug.Log("Started broadcasting.");
-            GameManager.Instance.EventBus.RaiseEvent("StartedServerBroadcast");
+            HelperMethods.ShowMessage("Cannot initialize Network Discovery");
+            return;
         }
+        StartAsServer();
+        Debug.Log("Started broadcasting.");
+        GameManager.Instance.EventBus.RaiseEvent("StartedServerBroadcast");
     }
 
     void StopServerBroadcast()
@@ -43,13 +45,15 @@ public class MyNetworkDiscovery : NetworkDiscovery
     void StartClientReceive()
     {
         initialized = Initialize();
-        if (initialized)
+        if (!initialized)
         {
-            StartAsClient();
-            Debug.Log("Started listening.");
-            GameManager.Instance.EventBus.RaiseEvent("StartedClientReceive");
+            HelperMethods.ShowMessage("Cannot initialize Network Discovery");
+            return;
         }
 
+        StartAsClient();
+        Debug.Log("Started listening.");
+        GameManager.Instance.EventBus.RaiseEvent("StartedClientReceive");
     }
 
     void StopClientReceive()

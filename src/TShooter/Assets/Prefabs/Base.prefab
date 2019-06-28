@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3007140067009161372}
   - component: {fileID: 6043810170650620473}
   - component: {fileID: 667333173615598693}
+  - component: {fileID: 545691777407486335}
   - component: {fileID: 8333983989917102040}
   m_Layer: 0
   m_Name: Base
@@ -144,6 +145,20 @@ MonoBehaviour:
   spawnPointName: 
   redMaterial: {fileID: 2100000, guid: f4849be961b6242a3bbe41c2fb57718f, type: 2}
   blueMaterial: {fileID: 2100000, guid: a549f3394291e4657b62f04890f480a8, type: 2}
+  SpawnPointContainer: {fileID: 0}
+--- !u!114 &545691777407486335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4676610303150624898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4b759e65fd64872842f0519085fac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpawnPointContainer: {fileID: 0}
 --- !u!114 &8333983989917102040
 MonoBehaviour:
   m_ObjectHideFlags: 0

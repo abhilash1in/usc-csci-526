@@ -86,12 +86,14 @@ public class InputController : MonoBehaviour
 
         if (IsJoystickEnabled(leftJoystick))
         {
-            State.Vertical += leftJoystick.Vertical;
-            State.Horizontal += leftJoystick.Horizontal;
+            print("IsJoystickEnabled left");
+            State.Vertical = leftJoystick.Vertical;
+            State.Horizontal = leftJoystick.Horizontal;
         }
 
         if (IsJoystickEnabled(rightJoystick))
         {
+            print("IsJoystickEnabled right");
             MouseInput = new Vector2(rightJoystick.Horizontal, rightJoystick.Vertical);
             State.Fire1 = SimpleInput.GetButton("Fire");
             State.Fire2 = SimpleInput.GetButton("Aim");

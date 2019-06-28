@@ -24,6 +24,8 @@ public class GameManager
                 m_Instance.gameObject.AddComponent<InputController>();
                 m_Instance.gameObject.AddComponent<Timer>();
                 m_Instance.gameObject.AddComponent<Respawner>();
+                m_Instance.gameObject.AddComponent<DontDestroyOnLoad>();
+                m_Instance.gameObject.AddComponent<PlayerTeamAllocator>();
             }
             return m_Instance;
         }
@@ -36,11 +38,24 @@ public class GameManager
             if (!m_IsNetworkGameChecked)
             {
                 m_IsNetworkGameChecked = true;
-                m_IsNetworkGame = GameObject.Find("NetworkManager") != null;
-                //m_IsNetworkGame = GameObject.Find("LobbyManager") != null;
+                m_IsNetworkGame = GameObject.Find("NetworkManager") != null || GameObject.Find("LobbyManager") != null;
                 Debug.Log("m_IsNetworkGame: " + m_IsNetworkGame);
             }
             return m_IsNetworkGame;
+        }
+    }
+
+    private PlayerTeamAllocator m_PlayerTeamAllocator;
+    public PlayerTeamAllocator PlayerTeamAllocator
+    {
+        get
+        {
+            if (m_PlayerTeamAllocator == null)
+            {
+                m_PlayerTeamAllocator = gameObject.GetComponent<PlayerTeamAllocator>();
+            }
+
+            return m_PlayerTeamAllocator;
         }
     }
 

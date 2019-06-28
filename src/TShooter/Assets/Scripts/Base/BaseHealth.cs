@@ -6,7 +6,6 @@ public class BaseHealth : Destructable
 {
     [SerializeField] float remainingHealthBeforeRespawn;
     Base mBase;
-    BaseSpawner spawner;
 
     public event System.Action OnRespawnBase;
 
@@ -21,7 +20,6 @@ public class BaseHealth : Destructable
         //remainingHealthBeforeRespawn = Random.Range(0, HitPointsRemaining);
         remainingHealthBeforeRespawn = 2;
         mBase = GetComponent<Base>();
-        spawner = GameObject.Find("BaseSpawner")?.GetComponent<BaseSpawner>();
         this.OnDamageReceived += Handle_OnDamageReceived;
         print("Base health start");
     }
@@ -34,7 +32,7 @@ public class BaseHealth : Destructable
             //remainingHealthBeforeRespawn = Random.Range(0, HitPointsRemaining);
             remainingHealthBeforeRespawn = 2;
             // respawn if base has not died
-            mBase.SetSpawnPoint(spawner.GetNewSpawnPointTransform().name);
+            mBase.SetSpawnPoint(mBase.BaseSpawner.GetNewSpawnPointTransform().name);
         }
     }
 }

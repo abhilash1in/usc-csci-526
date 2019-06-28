@@ -27,6 +27,7 @@ public class WinMenu : MonoBehaviour
 
     public void BackToMenu()
     {
+        GameManager.Instance.Timer.Clear();
         SceneManager.LoadScene(MainMenuSceneName);
     }
 }

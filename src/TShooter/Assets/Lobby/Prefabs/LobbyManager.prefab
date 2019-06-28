@@ -3142,6 +3142,7 @@ GameObject:
   - component: {fileID: 11466428}
   - component: {fileID: 11475086}
   - component: {fileID: 11415508}
+  - component: {fileID: 6642840376879002669}
   m_Layer: 5
   m_Name: LobbyManager
   m_TagString: Untagged
@@ -3264,6 +3265,7 @@ MonoBehaviour:
   m_OnlineScene: 
   m_SpawnPrefabs:
   - {fileID: 4676610303150624898, guid: 08a8099b68daf4a7792d9c8953be98e9, type: 3}
+  - {fileID: 978658172379761044, guid: 3195ba6ec9b5f425aa4dd03bbcc90b7e, type: 3}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -3331,6 +3333,10 @@ MonoBehaviour:
   m_PlayScene: MainScene
   lobbySlots: []
   prematchCountdown: 3
+  basePrefab: {fileID: 4676610303150624898, guid: 08a8099b68daf4a7792d9c8953be98e9,
+    type: 3}
+  blueMaterial: {fileID: 2100000, guid: a549f3394291e4657b62f04890f480a8, type: 2}
+  redMaterial: {fileID: 2100000, guid: f4849be961b6242a3bbe41c2fb57718f, type: 2}
   topPanel: {fileID: 11424994}
   mainMenuPanel: {fileID: 22442386}
   lobbyPanel: {fileID: 22443498}
@@ -3353,6 +3359,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c0578910bbe00d43919a92c7b9893fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6642840376879002669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b7b2df20759e42d29d87ee206d55943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &157512

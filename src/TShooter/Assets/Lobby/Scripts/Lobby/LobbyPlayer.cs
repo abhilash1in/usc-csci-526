@@ -11,7 +11,8 @@ namespace Prototype.NetworkLobby
     //Any LobbyHook can then grab it and pass those value to the game player prefab (see the Pong Example in the Samples Scenes)
     public class LobbyPlayer : NetworkLobbyPlayer
     {
-        static Color[] Colors = new Color[] { Color.magenta, Color.red, Color.cyan, Color.blue, Color.green, Color.yellow };
+        //static Color[] Colors = new Color[] { Color.magenta, Color.red, Color.cyan, Color.blue, Color.green, Color.yellow };
+        static Color[] Colors = new Color[] { Color.red, Color.blue };
         //used on server to avoid assigning the same color to two player
         static List<int> _colorInUse = new List<int>();
 
@@ -257,21 +258,21 @@ namespace Prototype.NetworkLobby
 
             idx = (idx + 1) % Colors.Length;
 
-            bool alreadyInUse = false;
+            //bool alreadyInUse = false;
 
-            do
-            {
-                alreadyInUse = false;
-                for (int i = 0; i < _colorInUse.Count; ++i)
-                {
-                    if (_colorInUse[i] == idx)
-                    {//that color is already in use
-                        alreadyInUse = true;
-                        idx = (idx + 1) % Colors.Length;
-                    }
-                }
-            }
-            while (alreadyInUse);
+            //do
+            //{
+            //    alreadyInUse = false;
+            //    for (int i = 0; i < _colorInUse.Count; ++i)
+            //    {
+            //        if (_colorInUse[i] == idx)
+            //        {//that color is already in use
+            //            alreadyInUse = true;
+            //            idx = (idx + 1) % Colors.Length;
+            //        }
+            //    }
+            //}
+            //while (alreadyInUse);
 
             if (inUseIdx >= 0)
             {//if we already add an entry in the colorTabs, we change it

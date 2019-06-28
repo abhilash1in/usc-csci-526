@@ -39,7 +39,8 @@ public class WeaponRecoil : MonoBehaviour
         get
         {
             if (m_Crosshair == null)
-                m_Crosshair = GameManager.Instance.LocalPLayer.playerAim.GetComponentInChildren<Crosshair>();
+                if(GameManager.Instance.LocalPLayer != null && GameManager.Instance.LocalPLayer.playerAim != null)
+                    m_Crosshair = GameManager.Instance.LocalPLayer.playerAim.GetComponentInChildren<Crosshair>();
             return m_Crosshair;
         }
     }

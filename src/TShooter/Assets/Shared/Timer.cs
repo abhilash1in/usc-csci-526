@@ -29,6 +29,11 @@ public class Timer : MonoBehaviour
         });
     }
 
+    public void Clear()
+    {
+        events.Clear();
+    }
+
     private void Update()
     {
         if (events.Count == 0)

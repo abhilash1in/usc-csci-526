@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class BaseSpawnPoint : MonoBehaviour
 {
-    public bool IsOccupied;
+    public bool IsOccupied
+    {
+        get
+        {
+            return transform.Find("RedBase") != null || transform.Find("BlueBase") != null;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
