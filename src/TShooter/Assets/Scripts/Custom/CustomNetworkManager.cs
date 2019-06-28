@@ -50,7 +50,7 @@ public class CustomNetworkManager : NetworkManager
 
     }
 
-    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
+    public void OnServerAddPlayerCustom(NetworkConnection conn, short playerControllerId)
     {
         clientCount++;
 
