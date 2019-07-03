@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a079cc854d05346cea09c1aa51b64872, type: 3}
   m_Name: SwatSoldier
   m_EditorClassIdentifier: 
-  RunSpeed: 5
+  RunSpeed: 8
   TurnSpeed: 90
   WalkSpeed: 2
   CrouchSpeed: 1
-  SprintSpeed: 8
+  SprintSpeed: 10

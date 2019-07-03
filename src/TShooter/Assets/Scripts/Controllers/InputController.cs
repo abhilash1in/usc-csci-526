@@ -68,6 +68,16 @@ public class InputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(leftJoystick == null || rightJoystick == null)
+        {
+            GameObject LeftJoystickGO = GameObject.Find("LeftJoystick");
+            GameObject RightJoystickGO = GameObject.Find("RightJoystick");
+            if (LeftJoystickGO != null && RightJoystickGO != null)
+            {
+                leftJoystick = LeftJoystickGO.GetComponent<FixedJoystick>();
+                rightJoystick = RightJoystickGO.GetComponent<FixedJoystick>();
+            }
+        }
         State.Vertical = Input.GetAxis("Vertical");
         State.Horizontal = Input.GetAxis("Horizontal");
         State.Fire1 = Input.GetButton("Fire1");
