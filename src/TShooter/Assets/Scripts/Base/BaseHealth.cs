@@ -31,8 +31,11 @@ public class BaseHealth : Destructable
         {
             //remainingHealthBeforeRespawn = Random.Range(0, HitPointsRemaining);
             remainingHealthBeforeRespawn = 2;
-            // respawn if base has not died
-            mBase.SetSpawnPoint(mBase.BaseSpawner.GetNewSpawnPointTransform().name);
+            if (isServer)
+            {
+                // respawn if base has not died
+                mBase.SetSpawnPoint(mBase.BaseSpawner.GetNewSpawnPointTransform().name);
+            }
         }
     }
 }

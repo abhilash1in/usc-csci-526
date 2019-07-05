@@ -11,7 +11,7 @@ public class Destructable : CustomNetworkBehviour
     public event System.Action<float> OnDamageReceived;
 
 
-    [SyncVar(hook = "printDamageTaken")]
+    [SyncVar]
     [SerializeField]
     private float m_DamageTaken;
 
@@ -33,9 +33,14 @@ public class Destructable : CustomNetworkBehviour
         }
     }
 
-    private void printDamageTaken(float d)
+    private void setDamageTaken(float d)
     {
-        print("Hook invoked: " + d);
+        print("Hook invoked");
+        if (!isServer)
+        {
+            print("Hook invoked in client: " + d + ". Team : " + TeamID);
+            m_DamageTaken = d;
+        }
     }
 
 
@@ -74,9 +79,12 @@ public class Destructable : CustomNetworkBehviour
 
     public virtual void TakeDamage(float amount)
     {
+        print("TakeDamage: " + amount);
         if (!IsAlive)
             return;
 
+        if (!isServer)
+            return;
         m_DamageTaken += amount;
 
         if(OnDamageReceived != null)
