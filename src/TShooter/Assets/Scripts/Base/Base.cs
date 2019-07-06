@@ -40,7 +40,6 @@ public class Base : CustomNetworkBehviour
     {
         renderer = GetComponent<Renderer>();
         //UpdateMaterial();
-        print("Base start");
     }
 
     public void SetSpawnPoint(string spName)

@@ -43,6 +43,7 @@ namespace SimpleInputNamespace
 
 		public void StartTracking()
 		{
+            Debug.Log("StartTracking");
 			if( !isTracking )
 			{
 				if( IsKeyValid() )

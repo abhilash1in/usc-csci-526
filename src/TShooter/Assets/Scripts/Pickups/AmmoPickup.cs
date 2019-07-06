@@ -12,7 +12,7 @@ public class AmmoPickup : PickupItem
     public override void OnPickup(Transform item)
     {
         // base.OnPickup(item);
-        print(item.name);
+        print("OnPickup: collided with " + item.name);
         var playerInventory = item.GetComponentInChildren<Container>();
         GameManager.Instance.Respawner.DespawnRandom(gameObject, respawnTime);
         playerInventory.Put(weaponType.ToString(), amount);

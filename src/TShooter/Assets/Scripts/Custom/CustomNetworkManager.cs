@@ -50,7 +50,27 @@ public class CustomNetworkManager : NetworkManager
 
     }
 
-    public void OnServerAddPlayerCustom(NetworkConnection conn, short playerControllerId)
+    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
+    {
+        //base.OnServerAddPlayer(conn, playerControllerId);
+        clientCount++;
+        Transform spawn = GetStartPosition();
+        var player = (GameObject) GameObject.Instantiate(playerPrefab, spawn.position, Quaternion.identity);
+        if (clientCount % 2 == 0)
+        {
+            print("TEAM BLUE");
+            player.name = "BluePlayer" + clientCount;
+            player.GetComponent<PlayerNetwork>().SetPlayerTeam(CustomNetworkBehviour.ETeamID.BLUE);
+        }
+        else
+        {
+            player.name = "RedPlayer" + clientCount;
+            player.GetComponent<PlayerNetwork>().SetPlayerTeam(CustomNetworkBehviour.ETeamID.RED);
+        }
+        NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
+    }
+
+    public void OnServerAddPlayerOld(NetworkConnection conn, short playerControllerId)
     {
         clientCount++;
 

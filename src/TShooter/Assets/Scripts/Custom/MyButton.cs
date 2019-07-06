@@ -39,4 +39,9 @@ public class MyButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             playerShoot.ActiveWeapon.Fire();
         }
     }
+
+    public void Test()
+    {
+        print("Fired");
+    }
 }

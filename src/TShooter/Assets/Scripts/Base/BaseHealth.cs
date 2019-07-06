@@ -21,7 +21,6 @@ public class BaseHealth : Destructable
         remainingHealthBeforeRespawn = 2;
         mBase = GetComponent<Base>();
         this.OnDamageReceived += Handle_OnDamageReceived;
-        print("Base health start");
     }
 
     void Handle_OnDamageReceived(float amount)
