@@ -92,10 +92,17 @@ public class Destructable : CustomNetworkBehviour
             OnDamageReceived(amount);
         }
 
-        if(HitPointsRemaining <= 0)
+        if (HitPointsRemaining <= 0)
         {
             Die();
         }
+
+        Base b = GetComponent<Base>();
+        if (b == null)
+            return;
+
+        float damage = HitPointsRemaining / hitPoints;
+        GameObject.Find("UICanvas").GetComponent<HealthBar>().SetHealthAmount(TeamID, damage);
     }
 
     public void AssignTeam(CustomNetworkBehviour.ETeamID id)

@@ -21,8 +21,6 @@ public class HealthBar : CustomNetworkBehviour
             case ETeamID.BLUE:
                 healthAmountBlue.localScale = new Vector3(1f, _amount, 1f);
                 break;
-            default:
-                break;
         }
          
     }
