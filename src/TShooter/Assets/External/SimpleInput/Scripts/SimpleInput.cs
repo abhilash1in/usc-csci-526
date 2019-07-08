@@ -148,7 +148,7 @@ public class SimpleInput : MonoBehaviour
 	{
 		// Initialize singleton instance
 		instance = new GameObject( "SimpleInput" ).AddComponent<SimpleInput>();
-		//DontDestroyOnLoad( instance.gameObject );
+		DontDestroyOnLoad( instance.gameObject );
 	}
 
 	private void Awake()

@@ -7,9 +7,11 @@ using UnityEngine.SceneManagement;
 public class WinMenu : MonoBehaviour
 {
     [SerializeField] GameObject WinMenuPanel;
+    [SerializeField] Text WinMenuPanelText;
     [SerializeField] public Button BackToMenuButton;
 
     public string MainMenuSceneName;
+    public string LobbySceneName;
 
     private void Start()
     {
@@ -23,11 +25,38 @@ public class WinMenu : MonoBehaviour
                 WinMenuPanel.SetActive(true);
             }, 4);
         });
+
+        GameManager.Instance.EventBus.AddListener("OnBlueTeamWin", () =>
+        {
+            GameManager.Instance.Timer.Add(() =>
+            {
+                GameManager.Instance.IsPaused = true;
+                WinMenuPanelText.text = "Winner: Team Blue";
+                WinMenuPanel.SetActive(true);
+            }, 2);
+        });
+
+        GameManager.Instance.EventBus.AddListener("OnRedTeamWin", () =>
+        {
+            GameManager.Instance.Timer.Add(() =>
+            {
+                GameManager.Instance.IsPaused = true;
+                WinMenuPanelText.text = "Winner: Team Red";
+                WinMenuPanel.SetActive(true);
+            }, 2);
+        });
     }
 
     public void BackToMenu()
     {
-        GameManager.Instance.Timer.Clear();
-        SceneManager.LoadScene(MainMenuSceneName);
+        try
+        {
+            GameManager.Instance.Timer.Clear();
+            SceneManager.LoadScene(LobbySceneName);
+        }
+        catch (System.Exception ex)
+        {
+            Application.Quit();
+        }
     }
 }

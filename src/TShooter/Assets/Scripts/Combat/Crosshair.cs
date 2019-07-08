@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class Crosshair : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Crosshair : MonoBehaviour
     [SerializeField] bool OnAimOnly;
 
     public Transform Reticule;
+    public Canvas UICanvas;
 
     Transform crossTop;
     Transform crossBottom;
@@ -24,9 +26,16 @@ public class Crosshair : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        GameObject UICanvasGO = GameObject.Find("UICanvas");
-        Transform reticuleTransform = UICanvasGO.transform.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "Reticule");
+        FindReticule();
+    }
 
+    void FindReticule()
+    {
+        GameObject UICanvasGO = GameObject.Find("UICanvas");
+        Transform reticuleTransform = UICanvasGO?.transform.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == "Reticule");
+
+        if (reticuleTransform == null)
+            return;
 
         Reticule = reticuleTransform;
         crossTop = Reticule.Find("Cross/Top").transform;
@@ -44,6 +53,14 @@ public class Crosshair : MonoBehaviour
 
     private void Update()
     {
+
+        if(Reticule == null)
+        {
+            FindReticule();
+            if (Reticule == null)
+                return;
+        }
+
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
         Reticule.transform.position = Vector3.Lerp(Reticule.transform.position, screenPosition, speed * Time.deltaTime);
 

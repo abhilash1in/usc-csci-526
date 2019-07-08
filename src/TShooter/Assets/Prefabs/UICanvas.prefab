@@ -1490,8 +1490,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WinMenuPanel: {fileID: 1357927378}
+  WinMenuPanelText: {fileID: 0}
   BackToMenuButton: {fileID: 1135500226}
   MainMenuSceneName: Scenes/MainMenu
+  LobbySceneName: Scenes/LobbyScene
 --- !u!1 &7381469953461520309
 GameObject:
   m_ObjectHideFlags: 0

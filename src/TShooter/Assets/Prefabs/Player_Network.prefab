@@ -763,8 +763,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2e6f52f361794cf9b4b65d28856489a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TeamID: 0
   hitPoints: 5
-  teamID: 0
+  autoHealthBoost: 0
+  boostDuration: 0
+  m_DamageTaken: 0
   ragdoll: {fileID: 978658173455790028}
 --- !u!114 &978658172379761070
 MonoBehaviour:
@@ -1532,6 +1535,7 @@ MonoBehaviour:
   speed: 12
   OnAimOnly: 1
   Reticule: {fileID: 0}
+  UICanvas: {fileID: 0}
 --- !u!1 &978658173163108306
 GameObject:
   m_ObjectHideFlags: 0
