@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     {
         public Vector2 Damping;
         public Vector2 Sensitivity;
+        public Vector2 AimSensitivity;
         public bool LockMouse;
     } 
 
@@ -140,8 +141,17 @@ public class Player : MonoBehaviour
     {
         mouseInput.x = Mathf.Lerp(mouseInput.x, playerInput.MouseInput.x, 1f / MouseControl.Damping.x);
         mouseInput.y = Mathf.Lerp(mouseInput.y, playerInput.MouseInput.y, 1f / MouseControl.Damping.y);
-        transform.Rotate(Vector3.up * mouseInput.x * MouseControl.Sensitivity.x);
-        playerAim.SetRotation(mouseInput.y * MouseControl.Sensitivity.y);
+        if (PlayerState.WeaponState == PlayerState.EWeaponState.AIMING || PlayerState.WeaponState == PlayerState.EWeaponState.AIMEDFIRING)
+        {
+            transform.Rotate(Vector3.up * mouseInput.x * MouseControl.AimSensitivity.x);
+            playerAim.SetRotation(mouseInput.y * MouseControl.AimSensitivity.y);
+        }
+        else
+        {
+            transform.Rotate(Vector3.up * mouseInput.x * MouseControl.Sensitivity.x);
+            playerAim.SetRotation(mouseInput.y * MouseControl.Sensitivity.y);
+        }
+
     }
    
 }

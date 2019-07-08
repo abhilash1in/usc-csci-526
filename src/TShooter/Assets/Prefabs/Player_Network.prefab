@@ -667,7 +667,8 @@ MonoBehaviour:
   Settings: {fileID: 11400000, guid: be0182a972c064ec4bb2cdcd93306cb5, type: 2}
   MouseControl:
     Damping: {x: 5, y: 7}
-    Sensitivity: {x: 1, y: 1}
+    Sensitivity: {x: 3, y: 3}
+    AimSensitivity: {x: 1, y: 1}
     LockMouse: 0
   playerAim: {fileID: 978658171730160011}
   IsLocalPlayer: 0

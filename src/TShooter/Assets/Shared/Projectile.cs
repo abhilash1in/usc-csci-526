@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Projectile : MonoBehaviour
+public class Projectile : CustomNetworkBehviour
 {
     [SerializeField] float speed;
     [SerializeField] float timeToLive;
     [SerializeField] float damage;
     [SerializeField] Transform bulletHole;
     Vector3 destination;
-    public CustomNetworkBehviour.ETeamID originTeamID;
-
 
     private void Start()
     {
@@ -58,7 +56,7 @@ public class Projectile : MonoBehaviour
                 return;
             }
         }
-        if(destructable.TeamID != originTeamID)
+        if(destructable.TeamID != TeamID)
         {
             HelperMethods.ShowMessage("Nice Shot!");
             destructable.TakeDamage(damage);

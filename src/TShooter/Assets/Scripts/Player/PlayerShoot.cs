@@ -72,6 +72,12 @@ public class PlayerShoot : WeaponController
                 ActiveWeapon.Fire();
             }
 
+            // Auto reload
+            if(ActiveWeapon.Reloader.RoundsRemainingInClip <= 2 && ActiveWeapon.Reloader.RoundsRemainingInInventory > 0 && !ActiveWeapon.Reloader.IsReloading)
+            {
+                ActiveWeapon.Reload();
+            }
+
 
             if (inputState.Reload)
                 ActiveWeapon.Reload();

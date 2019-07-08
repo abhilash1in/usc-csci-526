@@ -101,7 +101,7 @@ public class Shooter : MonoBehaviour
 
         if(player.PlayerNetwork != null)
         {
-            newBullet.originTeamID = player.PlayerNetwork.TeamID;
+            newBullet.TeamID = player.PlayerNetwork.TeamID;
         }
 
         if (shouldRecoil && this.WeaponRecoil != null)

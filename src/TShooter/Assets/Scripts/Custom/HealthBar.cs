@@ -11,12 +11,6 @@ public class HealthBar : CustomNetworkBehviour
     [SerializeField]
     RectTransform healthAmountBlue;
 
-
-    private void Awake()
-    {
-        print("healthbar awake");
-    }
-
     public void SetHealthAmount(ETeamID teamID, float _amount)
     {
         switch(teamID)

@@ -54,6 +54,7 @@ public class PlayerNetwork : CustomNetworkBehviour
 
         if (isLocalPlayer)
         {
+            print("setting as local player");
             player.SetAsLocalPlayer(); 
         }
     }
