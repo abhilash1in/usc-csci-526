@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 667333173615598693}
   - component: {fileID: 545691777407486335}
   - component: {fileID: 8333983989917102040}
+  - component: {fileID: 4076750949557247163}
+  - component: {fileID: 275398449426572664}
   m_Layer: 0
   m_Name: Base
   m_TagString: Base
@@ -176,3 +178,36 @@ MonoBehaviour:
   boostDuration: 25
   m_DamageTaken: 0
   remainingHealthBeforeRespawn: 0
+--- !u!114 &4076750949557247163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4676610303150624898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf9db670c1df4bb2843b82560ce5409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  size: {x: 20, y: 20}
+  rotateWithObject: 0
+  upAxis: {x: 0, y: 1, z: 0}
+  initialIconRotation: 0
+  clampIconInBorder: 1
+  clampDistance: 100
+--- !u!114 &275398449426572664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4676610303150624898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b3fb7ae1a4ef400f9cebda54dd132f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redBaseSprite: {fileID: 21300000, guid: 5ed2a7bc4e21847218c10ab412916107, type: 3}
+  blueBaseSprite: {fileID: 21300000, guid: ef685642720394e0ab8ceb26614d3efd, type: 3}

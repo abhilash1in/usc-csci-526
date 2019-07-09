@@ -105,6 +105,7 @@ public class InputController : MonoBehaviour
             MouseInput = new Vector2(rightJoystick.Horizontal, rightJoystick.Vertical);
             State.Fire1 = SimpleInput.GetButton("Fire");
             State.Fire2 = SimpleInput.GetButton("Aim");
+            MouseWheelUp = SimpleInput.GetButton("WeaponSwitch");
         }
     }
 

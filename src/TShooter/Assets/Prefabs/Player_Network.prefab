@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rateOfFire: 0.6
-  projectile: {fileID: 137762939910788512, guid: 88813fb06a14b404ba30ccea05234d49,
+  projectile: {fileID: 137762939910788512, guid: aa59d76e8e17248d09ad83d30af86079,
     type: 3}
   hand: {fileID: 4484200696980336726}
   audioReload: {fileID: 978658172980908209}
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5f46984983048f6abe6282818ed63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmmo: 20
+  maxAmmo: 30
   reloadTime: 2
   clipSize: 10
   inventory: {fileID: 978658172640333963}
@@ -626,6 +626,8 @@ GameObject:
   - component: {fileID: 978658172379761070}
   - component: {fileID: 5711792762682544982}
   - component: {fileID: 4267733496498607685}
+  - component: {fileID: 3736196795913806493}
+  - component: {fileID: 5095797780184972369}
   m_Layer: 8
   m_Name: Player_Network
   m_TagString: Player
@@ -833,6 +835,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TeamID: 0
   isFrozen: 0
+--- !u!114 &3736196795913806493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978658172379761044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf9db670c1df4bb2843b82560ce5409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  size: {x: 20, y: 20}
+  rotateWithObject: 0
+  upAxis: {x: 0, y: 1, z: 0}
+  initialIconRotation: 0
+  clampIconInBorder: 1
+  clampDistance: 100
+--- !u!114 &5095797780184972369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978658172379761044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c184a32c206e49c582108c71bc0b753, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redTeamSprite: {fileID: 21300000, guid: 5ed2a7bc4e21847218c10ab412916107, type: 3}
+  blueTeamSprite: {fileID: 21300000, guid: ef685642720394e0ab8ceb26614d3efd, type: 3}
+  unknownSprite: {fileID: 21300000, guid: 9abce3e87c5b94d899d1dbbdc1b9a2ff, type: 3}
 --- !u!1 &978658172482830953
 GameObject:
   m_ObjectHideFlags: 0
