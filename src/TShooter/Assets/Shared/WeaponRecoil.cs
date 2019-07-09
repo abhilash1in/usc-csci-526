@@ -53,6 +53,8 @@ public class WeaponRecoil : MonoBehaviour
 
     private void Update()
     {
+        if (!Shooter.player.IsLocalPlayer)
+            return;
         if(nextRecoilCooldown > Time.time)
         {
             // holding the fire button

@@ -16,32 +16,7 @@ public class MiniMapTargetAssigner : MonoBehaviour
 
     void Instance_OnLocalPlayerJoined(Player player)
     {
-        print("Instance_OnLocalPlayerJoined");
         localPlayerTransform = player.transform;
         miniMapController.target = localPlayerTransform;
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if (miniMapController == null)
-        //{
-        //    print("miniMapController null");
-        //    return;
-        //}
-
-        //if (localPlayerTransform == null)
-        //{
-        //    print("localPlayerTransform null");
-        //    localPlayerTransform = GameManager.Instance.LocalPLayer.transform;
-
-        //    if (localPlayerTransform == null)
-        //    {
-        //        print("localPlayerTransform still null");
-        //        return;
-        //    }
-        //}
-        //miniMapController.target = localPlayerTransform;
     }
 }

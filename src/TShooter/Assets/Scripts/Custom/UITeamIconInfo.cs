@@ -35,10 +35,6 @@ public class UITeamIconInfo : MonoBehaviour
         GameManager.Instance.OnLocalPlayerJoined += Instance_OnLocalPlayerJoined;
     }
 
-    private void Awake()
-    {
-        print("awake");
-    }
 
     void Instance_OnLocalPlayerJoined(Player player)
     {

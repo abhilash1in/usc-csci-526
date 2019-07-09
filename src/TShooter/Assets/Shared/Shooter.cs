@@ -11,7 +11,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] AudioController audioFire;
     [SerializeField] bool shouldRecoil = true;
 
-    Player player;
+    public Player player;
 
     public Vector3 AimPoint;
     public Vector3 AimTargetOffset;

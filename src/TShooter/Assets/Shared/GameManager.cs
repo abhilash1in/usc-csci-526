@@ -39,7 +39,7 @@ public class GameManager
             {
                 m_IsNetworkGameChecked = true;
                 m_IsNetworkGame = GameObject.Find("NetworkManager") != null || GameObject.Find("LobbyManager") != null;
-                Debug.Log("m_IsNetworkGame: " + m_IsNetworkGame);
+                // Debug.Log("m_IsNetworkGame: " + m_IsNetworkGame);
             }
             return m_IsNetworkGame;
         }

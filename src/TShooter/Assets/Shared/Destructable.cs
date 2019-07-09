@@ -25,13 +25,8 @@ public class Destructable : CustomNetworkBehviour
     {
         if (autoHealthBoost)
         {
-            print("autoHealthBoost enabled");
             if(isServer)
                 BoostHealth();
-        }
-        else
-        {
-            print("autoHealthBoost DISABLED");
         }
     }
 

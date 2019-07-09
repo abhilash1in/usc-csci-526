@@ -23,7 +23,6 @@ public class MiniMapPlayerTeamIconAssigner : MonoBehaviour
 
     void assignIcon()
     {
-        print("MiniMapPlayerTeamIconAssigner: " + playerGO.PlayerNetwork.TeamID);
         if (playerGO.PlayerNetwork.TeamID == CustomNetworkBehviour.ETeamID.NONE)
         {
             teamIconAssigned = false;

@@ -17,11 +17,18 @@ public class Crosshair : MonoBehaviour
     Transform crossLeft;
     Transform crossRight;
 
+    Player player;
+
     float reticuleStartPoint;
+
+    private void Awake()
+    {
+        player = GetComponentInParent<Player>();
+    }
 
     private void Start()
     {
-        if (!GetComponentInParent<Player>().IsLocalPlayer)
+        if (player != null && !player.IsLocalPlayer)
         {
             Destroy(this.gameObject);
         }
@@ -83,6 +90,12 @@ public class Crosshair : MonoBehaviour
     {
         if (crossTop == null)
             return;
+
+        if (player != null && !player.IsLocalPlayer)
+        {
+            return;
+        }
+
         crossTop.localPosition = new Vector3(0, reticuleStartPoint + scale, 0);
         crossBottom.localPosition = new Vector3(0, -reticuleStartPoint - scale, 0);
         crossLeft.localPosition = new Vector3(-reticuleStartPoint - scale, 0, 0);
