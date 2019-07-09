@@ -64,7 +64,7 @@ public class Projectile : CustomNetworkBehviour
             
         else
         {
-            HelperMethods.ShowMessage("Frendly Fire");
+            HelperMethods.ShowMessage("Friendly Fire");
         }
     }
 

@@ -182,8 +182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b6fc3d023dd43ad823a6bdbbd816ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minAngle: -20
-  maxAngle: 20
+  minAngle: -5
+  maxAngle: 10
 --- !u!1 &978658171741287032
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,7 +667,7 @@ MonoBehaviour:
   Settings: {fileID: 11400000, guid: be0182a972c064ec4bb2cdcd93306cb5, type: 2}
   MouseControl:
     Damping: {x: 5, y: 7}
-    Sensitivity: {x: 3, y: 3}
+    Sensitivity: {x: 2, y: 2}
     AimSensitivity: {x: 1, y: 1}
     LockMouse: 0
   playerAim: {fileID: 978658171730160011}

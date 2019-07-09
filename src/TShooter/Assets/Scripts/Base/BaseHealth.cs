@@ -12,7 +12,8 @@ public class BaseHealth : Destructable
     public override void Die()
     {
         base.Die();
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
     private void Awake()

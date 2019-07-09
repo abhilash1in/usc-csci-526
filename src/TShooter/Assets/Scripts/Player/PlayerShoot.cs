@@ -38,7 +38,6 @@ public class PlayerShoot : WeaponController
     {
         if(inputState == null)
         {
-            print("inputState is null");
             return;
         }
 

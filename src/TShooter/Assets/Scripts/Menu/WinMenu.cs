@@ -52,7 +52,8 @@ public class WinMenu : MonoBehaviour
         try
         {
             GameManager.Instance.Timer.Clear();
-            SceneManager.LoadScene(LobbySceneName);
+            Application.Quit();
+            //SceneManager.LoadScene(LobbySceneName);
         }
         catch (System.Exception ex)
         {

@@ -26,7 +26,8 @@ public class Destructable : CustomNetworkBehviour
         if (autoHealthBoost)
         {
             print("autoHealthBoost enabled");
-            BoostHealth();
+            if(isServer)
+                BoostHealth();
         }
         else
         {
@@ -37,7 +38,7 @@ public class Destructable : CustomNetworkBehviour
     void BoostHealth()
     {
         GameManager.Instance.Timer.Add(() => {
-            if (m_DamageTaken > 0)
+            if (m_DamageTaken > 0 && !GameManager.Instance.IsPaused)
             {
                 print("boosting health");
                 m_DamageTaken = m_DamageTaken - 1;
@@ -73,7 +74,7 @@ public class Destructable : CustomNetworkBehviour
 
     private void setDamageTaken(float d)
     {
-        print("Hook invoked");
+        print("Hook invoked : " + d);
         if (!isServer)
         {
             print("Hook invoked in client: " + d + ". Team : " + TeamID);
@@ -121,6 +122,14 @@ public class Destructable : CustomNetworkBehviour
         }
     }
 
+    private void Update()
+    {
+        if (HitPointsRemaining <= 0)
+        {
+            Die();
+        }
+    }
+
     public virtual void TakeDamage(float amount)
     {
         print("TakeDamage: " + amount);
@@ -129,6 +138,7 @@ public class Destructable : CustomNetworkBehviour
 
         if (!isServer)
             return;
+
         m_DamageTaken += amount;
 
         if(OnDamageReceived != null)
