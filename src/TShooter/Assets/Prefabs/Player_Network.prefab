@@ -116,6 +116,7 @@ MonoBehaviour:
   audioReload: {fileID: 978658172980908209}
   audioFire: {fileID: 978658172835186118}
   shouldRecoil: 1
+  player: {fileID: 0}
   AimPoint: {x: 0, y: 0, z: 0}
   AimTargetOffset: {x: 0, y: 0, z: 0}
   Reloader: {fileID: 0}
@@ -767,9 +768,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TeamID: 0
-  hitPoints: 5
-  autoHealthBoost: 0
-  boostDuration: 0
+  hitPoints: 50
+  autoHealthBoost: 1
+  boostDuration: 5
   m_DamageTaken: 0
   ragdoll: {fileID: 978658173455790028}
 --- !u!114 &978658172379761070
@@ -1627,6 +1628,7 @@ MonoBehaviour:
   audioReload: {fileID: 978658172482830955}
   audioFire: {fileID: 978658172282933544}
   shouldRecoil: 1
+  player: {fileID: 0}
   AimPoint: {x: 0, y: 0, z: 0}
   AimTargetOffset: {x: 0, y: 0, z: 0}
   Reloader: {fileID: 0}

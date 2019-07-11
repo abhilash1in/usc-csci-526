@@ -140,7 +140,7 @@ public class PlayerNetwork : CustomNetworkBehviour
 
             Vector3 predictedPosition = new Vector3(predictedState.PositionX, predictedState.PositionY, predictedState.PositionZ);
             float positionDifferenceFromServer = Vector3.Distance(predictedPosition, serverPosition);
-            if (positionDifferenceFromServer > 1f)
+            if (positionDifferenceFromServer > 3f)
                 transform.position = Vector3.Lerp(transform.position, serverPosition, player.Settings.RunSpeed * Time.deltaTime); 
         }
 
@@ -177,7 +177,7 @@ public class PlayerNetwork : CustomNetworkBehviour
             if (!isServer)
             {
                 float positionDifferenceFromServer = Vector3.Distance(transform.position, serverPosition);
-                if(positionDifferenceFromServer > 1f)
+                if(positionDifferenceFromServer > 3f)
                 {
                     transform.position = Vector3.Lerp(transform.position, serverPosition, player.Settings.RunSpeed * Time.deltaTime);
                 }
